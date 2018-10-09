@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/fondo"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Main2Activity">
+
+
+    <Button
+        android:id="@+id/inspire"
+        android:layout_width="190sp"
+        android:layout_height="200sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="188dp"
+        android:background="@drawable/btn_inspire" />
+
+
+    <Button
+        android:id="@+id/distrac"
+        android:layout_width="180sp"
+        android:layout_height="180sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="46dp"
+        android:layout_marginEnd="7dp"
+        android:background="@drawable/btn_distract"
+        />
+
+    <Button
+        android:id="@+id/focus"
+        android:layout_width="205sp"
+        android:layout_height="200sp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="259dp"
+        android:layout_marginEnd="179dp"
+        android:background="@drawable/btn_focus" />
+
+    <Button
+        android:id="@+id/relax"
+        android:layout_width="180sp"
+        android:layout_height="200sp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginEnd="2dp"
+        android:layout_marginBottom="106dp"
+        android:background="@drawable/btn_relax" />
+
+
+</RelativeLayout>
