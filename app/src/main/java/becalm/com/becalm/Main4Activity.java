@@ -1,8 +1,10 @@
 package becalm.com.becalm;
 
 import android.graphics.Color;
+import android.graphics.Point;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
 import android.widget.Button;
 
@@ -27,16 +29,38 @@ public class Main4Activity extends AppCompatActivity {
         btn_color7 = findViewById(R.id.btncolor6);
         btn_color8 = findViewById(R.id.btncolor7);
 
+        Display display = getWindowManager(). getDefaultDisplay();
+        Point size = new Point();
+        display. getSize(size);
+        int width = size.x;
+        final int cellSize = (int)(width / 3);
+        btn_color.setWidth(cellSize);
+        btn_color.setHeight(cellSize);
+        btn_color1.setWidth(cellSize);
+        btn_color1.setHeight(cellSize);
+        btn_color2.setWidth(cellSize);
+        btn_color2.setHeight(cellSize);
+        btn_color3.setWidth(cellSize);
+        btn_color3.setHeight(cellSize);
+        btn_color4.setWidth(cellSize);
+        btn_color4.setHeight(cellSize);
+        btn_color5.setWidth(cellSize);
+        btn_color5.setHeight(cellSize);
+        btn_color6.setWidth(cellSize);
+        btn_color6.setHeight(cellSize);
+        btn_color7.setWidth(cellSize);
+        btn_color7.setHeight(cellSize);
+        btn_color8.setWidth(cellSize);
+        btn_color8.setHeight(cellSize);
+
 
         btn_color.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
+                colorRandomForButton(btn_color);
 
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
 
-                btn_color.setBackgroundColor(color);
 
             }
         });
@@ -45,11 +69,7 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
-
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-                btn_color1.setBackgroundColor(color);
+                colorRandomForButton(btn_color1);
 
             }
         });
@@ -57,11 +77,7 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
-
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-                btn_color2.setBackgroundColor(color);
+                colorRandomForButton(btn_color2);
 
             }
         });
@@ -69,11 +85,7 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
-
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-                btn_color3.setBackgroundColor(color);
+                colorRandomForButton(btn_color3);
 
             }
         });
@@ -81,11 +93,7 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
-
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-                btn_color4.setBackgroundColor(color);
+                colorRandomForButton(btn_color4);
 
             }
         });
@@ -93,11 +101,7 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
-
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-                btn_color5.setBackgroundColor(color);
+                colorRandomForButton(btn_color5);
 
             }
         });
@@ -106,11 +110,7 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
-
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-                btn_color6.setBackgroundColor(color);
+                colorRandomForButton(btn_color6);
 
             }
         });
@@ -118,11 +118,11 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
-
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-                btn_color7.setBackgroundColor(color);
+                //colorRandomForButton(btn_color7);
+                int randX = (int)(Math.random()*3);
+                int randY = (int)(Math.random()*3);
+                btn_color7.setX(randX*cellSize);
+                btn_color7.setY(randY*cellSize);
 
             }
         });
@@ -130,13 +130,17 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Random random = new Random();
-
-                int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
-
-                btn_color8.setBackgroundColor(color);
+                colorRandomForButton(btn_color8);
 
             }
         });
+    }
+
+    private void colorRandomForButton(Button btn_color4) {
+        Random random = new Random();
+
+        int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+
+        btn_color4.setBackgroundColor(color);
     }
 }
