@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/fondo"
@@ -10,26 +10,27 @@
 
     <Button
         android:id="@+id/btnMusciCcalm"
-        android:layout_width="200sp"
-        android:layout_height="200sp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="159dp"
-        android:background="@drawable/button" />
+        android:layout_marginTop="13dp"
+        android:background="@drawable/fastbutton" />
 
 
     <Button
         android:id="@+id/btnMusicUpbeat"
-        android:layout_width="200sp"
-        android:layout_height="200sp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="159dp"
-        android:background="@drawable/button" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="13dp"
+        android:layout_marginEnd="36dp"
+        android:background="@drawable/slowbutton" />
 
 
 
-</LinearLayout>
+</RelativeLayout>
 
 
 

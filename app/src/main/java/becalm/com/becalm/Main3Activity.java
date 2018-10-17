@@ -28,11 +28,11 @@ public class Main3Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mp.isPlaying()){
                     mp.pause();
-                    btnplay.setBackgroundResource(R.drawable.button);
+                    btnplay.setBackgroundResource(R.drawable.fastbutton);
                     Toast.makeText(Main3Activity.this, "pausa", Toast.LENGTH_SHORT).show();
                 }else{
                     mp.start();
-                    btnplay.setBackgroundResource(R.drawable.button);
+                    btnplay.setBackgroundResource(R.drawable.fastbutton);
                 }
 
             }
@@ -43,11 +43,11 @@ public class Main3Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if (mp2.isPlaying()){
                     mp2.pause();
-                    btnplay.setBackgroundResource(R.drawable.button);
+                    btnplay2.setBackgroundResource(R.drawable.slowbutton);
                     Toast.makeText(Main3Activity.this, "pausa", Toast.LENGTH_SHORT).show();
                 }else{
                     mp2.start();
-                    btnplay2.setBackgroundResource(R.drawable.button);
+                    btnplay2.setBackgroundResource(R.drawable.slowbutton);
                 }
 
 

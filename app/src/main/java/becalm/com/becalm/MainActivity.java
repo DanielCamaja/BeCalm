@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void playMusic(){
-        mp2 = MediaPlayer.create(this,R.raw.segundo);
+        mp2 = MediaPlayer.create(this,R.raw.cancion_inicial);
         if (mp2.isPlaying()){
             mp2.pause();
         }else{
