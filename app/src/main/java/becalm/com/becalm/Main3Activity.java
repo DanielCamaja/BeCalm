@@ -5,49 +5,49 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.Toast;
 
 public class Main3Activity extends AppCompatActivity {
 
-    Button btnplay, btnplay2;
-    MediaPlayer mp, mp2;
+    ImageButton btnplayfast, btnplayslow;
+    MediaPlayer mp0, mp1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        btnplay = (Button) findViewById(R.id.btnMusciCcalm);
-        btnplay2 = (Button) findViewById(R.id.btnMusicUpbeat);
+        btnplayfast = (ImageButton) findViewById(R.id.btnMusicFast);
+        btnplayslow = (ImageButton) findViewById(R.id.btnMusicSlow);
 
-
-        mp = MediaPlayer.create(this,R.raw.primero);
-        mp2 = MediaPlayer.create(this,R.raw.segundo);
-        btnplay.setOnClickListener(new View.OnClickListener() {
+        mp0 = MediaPlayer.create(this,R.raw.primero);
+        mp1 = MediaPlayer.create(this,R.raw.segundo);
+        btnplayfast.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mp.isPlaying()){
-                    mp.pause();
-                    btnplay.setBackgroundResource(R.drawable.fastbutton);
+                if (mp0.isPlaying()) {
+                    mp0.pause();
+                    btnplayfast.setBackgroundResource(R.drawable.fast_button);
                     Toast.makeText(Main3Activity.this, "pausa", Toast.LENGTH_SHORT).show();
-                }else{
-                    mp.start();
-                    btnplay.setBackgroundResource(R.drawable.fastbutton);
+                } else {
+                    mp0.start();
+                    btnplayfast.setBackgroundResource(R.drawable.fast_button);
                 }
-
             }
         });
 
-        btnplay2.setOnClickListener(new View.OnClickListener() {
+
+        btnplayslow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mp2.isPlaying()){
-                    mp2.pause();
-                    btnplay2.setBackgroundResource(R.drawable.slowbutton);
+                if (mp1.isPlaying()){
+                    mp1.pause();
+                    btnplayslow.setBackgroundResource(R.drawable.slow_button);
                     Toast.makeText(Main3Activity.this, "pausa", Toast.LENGTH_SHORT).show();
                 }else{
-                    mp2.start();
-                    btnplay2.setBackgroundResource(R.drawable.slowbutton);
+                    mp1.start();
+                    btnplayslow.setBackgroundResource(R.drawable.slow_button);
                 }
 
 

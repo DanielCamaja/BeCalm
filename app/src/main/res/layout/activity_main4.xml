@@ -26,7 +26,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="128dp"
         android:layout_marginTop="259dp"
-         />
+        />
 
     <Button
         android:id="@+id/btncolor2"
@@ -46,7 +46,7 @@
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
         android:layout_marginTop="131dp"
-         />
+        />
 
     <Button
         android:id="@+id/btncolor4"

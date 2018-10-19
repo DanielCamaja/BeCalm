@@ -1,6 +1,5 @@
 package becalm.com.becalm;
 
-import android.app.ActionBar;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;

@@ -1,5 +1,8 @@
 package becalm.com.becalm;
 
+import android.support.v7.app.AppCompatActivity;
+import android.os.Bundle;
+
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.media.MediaPlayer;
@@ -9,9 +12,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics());
         setContentView(R.layout.activity_main);
 
+        inicio = (TextView) findViewById(R.id.textoinicio);
 
         btn = (Button) findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -35,6 +35,10 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        String fuente = "fuentes/ostrichsans.otf";
+        this.scan = Typeface.createFromAsset(getAssets(),fuente);
+        inicio.setTypeface(scan);
 
 
 

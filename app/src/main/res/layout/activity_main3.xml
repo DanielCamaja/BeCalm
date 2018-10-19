@@ -3,36 +3,29 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/fondo"
+    android:padding="5dp"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Main3Activity">
 
-
-    <Button
-        android:id="@+id/btnMusciCcalm"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+    <ImageButton
+        android:id="@+id/btnMusicFast"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
+        android:layout_marginStart="74dp"
+
         android:layout_marginTop="13dp"
-        android:background="@drawable/fastbutton" />
+        android:background="@drawable/fast_button" />
 
-
-    <Button
-        android:id="@+id/btnMusicUpbeat"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
+    <ImageButton
+        android:id="@+id/btnMusicSlow"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="13dp"
-        android:layout_marginEnd="36dp"
-        android:background="@drawable/slowbutton" />
-
-
-
+        android:layout_marginTop="18dp"
+        android:layout_marginEnd="71dp"
+        android:background="@drawable/slow_button" />
 </RelativeLayout>
-
-
-
-
 

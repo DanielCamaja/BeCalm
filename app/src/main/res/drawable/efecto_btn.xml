@@ -4,11 +4,4 @@
     <item android:drawable="@drawable/presionar" android:state_pressed="true"></item>
     <item android:drawable="@drawable/button"></item>
 
-
-    <item android:drawable="@drawable/focus" />
-
-    <item android:drawable="@drawable/relax" />
-
-    <item android:drawable="@drawable/inspire"/>
-
 </selector>
