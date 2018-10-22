@@ -2,6 +2,7 @@ package becalm.com.becalm;
 
 import android.graphics.Color;
 import android.graphics.Point;
+import android.media.MediaPlayer;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
@@ -12,22 +13,26 @@ import java.util.Random;
 
 public class Main4Activity extends AppCompatActivity {
 
-    private Button btn_color,btn_color1,btn_color2,btn_color3,btn_color4,btn_color5,btn_color6,btn_color7,btn_color8;
+    private Button btn_color,btn_color1,btn_color2,btn_color3,btn_color4,btn_color5,btn_color6,btn_color7,btn_color8,btn_color9;
+
+    MediaPlayer mp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
 
-        btn_color = findViewById(R.id.button);
-        btn_color1 = findViewById(R.id.btncolor);
-        btn_color2 = findViewById(R.id.btncolor1);
-        btn_color3 = findViewById(R.id.btncolor2);
-        btn_color4 = findViewById(R.id.btncolor3);
-        btn_color5 = findViewById(R.id.btncolor4);
-        btn_color6 = findViewById(R.id.btncolor5);
-        btn_color7 = findViewById(R.id.btncolor6);
-        btn_color8 = findViewById(R.id.btncolor7);
+        btn_color = findViewById(R.id.button0);
+        btn_color1 = findViewById(R.id.button1);
+        btn_color2 = findViewById(R.id.btncolor2);
+        btn_color3 = findViewById(R.id.btncolor3);
+        btn_color4 = findViewById(R.id.btncolor4);
+        btn_color5 = findViewById(R.id.btncolor5);
+        btn_color6 = findViewById(R.id.btncolor6);
+        btn_color7 = findViewById(R.id.btncolor7);
+        btn_color8 = findViewById(R.id.btncolor8);
+        btn_color9 = findViewById(R.id.btncolor9);
+
 
         Display display = getWindowManager(). getDefaultDisplay();
         Point size = new Point();
@@ -118,11 +123,7 @@ public class Main4Activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                //colorRandomForButton(btn_color7);
-                int randX = (int)(Math.random()*3);
-                int randY = (int)(Math.random()*3);
-                btn_color7.setX(randX*cellSize);
-                btn_color7.setY(randY*cellSize);
+                colorRandomForButton(btn_color7);
 
             }
         });
@@ -134,13 +135,45 @@ public class Main4Activity extends AppCompatActivity {
 
             }
         });
+        btn_color9.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                //colorRandomForButton(btn_color7);
+                int randX = (int)(Math.random()*3);
+                int randY = (int)(Math.random()*3);
+                btn_color7.setX(randX*cellSize);
+                btn_color7.setY(randY*cellSize);
+
+            }
+        });
     }
 
     private void colorRandomForButton(Button btn_color4) {
         Random random = new Random();
 
-        int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(256));
+        int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(257));
 
         btn_color4.setBackgroundColor(color);
+    }
+    private void playMusic(){
+        mp2 = MediaPlayer.create(this,R.raw.cancion_inicial);
+        if (mp2.isPlaying()){
+            mp2.pause();
+        }else{
+            mp2.start();
+        }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        mp2.stop();
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        playMusic();
     }
 }

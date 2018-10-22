@@ -15,9 +15,8 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    private TextView inicio;
+
     private Button btn;
-    private Typeface scan;
     MediaPlayer mp2;
 
     @Override
@@ -25,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        inicio = (TextView) findViewById(R.id.textoinicio);
 
         btn = (Button) findViewById(R.id.btn);
         btn.setOnClickListener(new View.OnClickListener() {
@@ -36,9 +34,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        String fuente = "fuentes/ostrichsans.otf";
-        this.scan = Typeface.createFromAsset(getAssets(),fuente);
-        inicio.setTypeface(scan);
 
 
 
