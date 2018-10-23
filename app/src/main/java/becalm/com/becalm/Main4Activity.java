@@ -64,9 +64,6 @@ public class Main4Activity extends AppCompatActivity {
             public void onClick(View v) {
 
                 colorRandomForButton(btn_color);
-
-
-
             }
         });
 
@@ -142,8 +139,8 @@ public class Main4Activity extends AppCompatActivity {
                 //colorRandomForButton(btn_color7);
                 int randX = (int)(Math.random()*3);
                 int randY = (int)(Math.random()*3);
-                btn_color7.setX(randX*cellSize);
-                btn_color7.setY(randY*cellSize);
+                btn_color9.setX(randX*cellSize);
+                btn_color9.setY(randY*cellSize);
 
             }
         });
