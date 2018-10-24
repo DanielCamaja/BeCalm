@@ -15,8 +15,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="0dp"
-        />
+        android:layout_marginTop="3dp" />
 
     <Button
         android:id="@+id/button1"
@@ -24,8 +23,8 @@
         android:layout_height="136dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="126dp"
-        android:layout_marginTop="2dp" />
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="3dp" />
 
 
     <Button
@@ -34,9 +33,8 @@
         android:layout_height="136dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="253dp"
-        android:layout_marginTop="0dp"
-        />
+        android:layout_marginStart="244dp"
+        android:layout_marginTop="2dp" />
 
 
     <Button
@@ -46,8 +44,7 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_marginStart="0dp"
-        android:layout_marginTop="131dp"
-        />
+        android:layout_marginTop="125dp" />
 
 
     <Button
@@ -56,9 +53,8 @@
         android:layout_height="136dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="130dp"
-        />
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="126dp" />
 
     <Button
         android:id="@+id/btncolor5"
@@ -66,10 +62,36 @@
         android:layout_height="136dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="253dp"
-        android:layout_marginTop="130dp"
-        />
+        android:layout_marginStart="245dp"
+        android:layout_marginTop="125dp" />
 
+
+    <Button
+        android:id="@+id/btncolor6"
+        android:layout_width="131dp"
+        android:layout_height="136dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="248dp" />
+
+    <Button
+        android:id="@+id/btncolor7"
+        android:layout_width="131dp"
+        android:layout_height="136dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="250dp" />
+
+    <Button
+        android:id="@+id/btncolor8"
+        android:layout_width="131dp"
+        android:layout_height="136dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="246dp"
+        android:layout_marginTop="248dp" />
 
     <Button
         android:id="@+id/btncolor9"
@@ -80,35 +102,5 @@
         android:layout_marginStart="133dp"
         android:layout_marginTop="396dp"
         android:background="@color/colorAccent" />
-
-    <Button
-        android:id="@+id/btncolor6"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="257dp"
-        />
-
-    <Button
-        android:id="@+id/btncolor7"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="259dp"
-        />
-
-    <Button
-        android:id="@+id/btncolor8"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="253dp"
-        android:layout_marginTop="261dp"
-        />
 
 </RelativeLayout>
