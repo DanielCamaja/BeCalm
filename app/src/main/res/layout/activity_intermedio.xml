@@ -1,16 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".intermedio">
+    android:padding="16dp"
+    android:background="@drawable/fondo"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+
+        android:layout_marginTop="0dp"
+        android:text="@string/textoinpire"
+        android:textColor="@color/white"
+        android:textSize="20dp" />
 
     <Button
-        android:id="@+id/botonir"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:text="hola"
-        />
+        android:id="@+id/intermedialboton"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="236dp"
+        android:background="@drawable/efecto_btn" />
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

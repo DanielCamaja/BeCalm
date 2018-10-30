@@ -10,49 +10,66 @@ import android.widget.Toast;
 
 public class Main3Activity extends AppCompatActivity {
 
-    ImageButton btnplayfast, btnplayslow;
+
     MediaPlayer mp0, mp1;
+    int pauset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
 
-        btnplayfast = (ImageButton) findViewById(R.id.btnMusicFast);
-        btnplayslow = (ImageButton) findViewById(R.id.btnMusicSlow);
 
-        mp0 = MediaPlayer.create(this,R.raw.primero);
-        mp1 = MediaPlayer.create(this,R.raw.segundo);
-        btnplayfast.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mp0.isPlaying()) {
-                    mp0.pause();
-                    btnplayfast.setBackgroundResource(R.drawable.fast_button);
-                    Toast.makeText(Main3Activity.this, "pausa", Toast.LENGTH_SHORT).show();
-                } else {
-                    mp0.start();
-                    btnplayfast.setBackgroundResource(R.drawable.fast_button);
-                }
-            }
-        });
+    }
 
+    public void slowmusic(View view) {
+     if (mp0 == null){
+         mp0 = MediaPlayer.create(this, R.raw.segundo);
+         mp0.start();
+         Toast.makeText(this, "inico", Toast.LENGTH_SHORT).show();
+     }else if (!mp0.isPlaying()){
+         mp0.seekTo(pauset);
+         mp0.start();
+         Toast.makeText(this, "Inicio", Toast.LENGTH_SHORT).show();
+     }
 
-        btnplayslow.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mp1.isPlaying()){
-                    mp1.pause();
-                    btnplayslow.setBackgroundResource(R.drawable.slow_button);
-                    Toast.makeText(Main3Activity.this, "pausa", Toast.LENGTH_SHORT).show();
-                }else{
-                    mp1.start();
-                    btnplayslow.setBackgroundResource(R.drawable.slow_button);
-                }
+    }
 
+    public void fastmusic(View view) {
+        if (mp1 == null){
+            mp1 = MediaPlayer.create(this, R.raw.primero);
+            mp1.start();
+            Toast.makeText(this, "inico", Toast.LENGTH_SHORT).show();
+        }else if (!mp1.isPlaying()){
+            mp1.seekTo(pauset);
+            mp1.start();
+            Toast.makeText(this, "Inicio", Toast.LENGTH_SHORT).show();
+        }
+    }
 
-            }
-        });
+    public void pause(View view) {
+        if (mp1 !=null){
+            mp1.pause();
+            pauset = mp1.getCurrentPosition();
+            Toast.makeText(this, "pause", Toast.LENGTH_SHORT).show();
+        }else if (mp0 !=null){
+            mp0.pause();
+            pauset = mp0.getCurrentPosition();
+            Toast.makeText(this, "pause", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void stop(View view) {
+
+        if (mp1 !=null){
+            mp1.stop();
+            mp1 = null;
+            Toast.makeText(this, "stop", Toast.LENGTH_SHORT).show();
+        }else if (mp0 !=null){
+            mp0.stop();
+            mp0 = null;
+            Toast.makeText(this, "stop", Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

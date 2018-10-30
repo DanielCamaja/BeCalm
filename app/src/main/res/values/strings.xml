@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">BeCalm</string>
+    <string name="title_activity_intermedio_focus">IntermedioFocus</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="textofocus">The  simple  act  of  coloring  will  allow  you  to  focus  on  a  positive  and  creative  activity,  while  at  the  same  time  diverting  your  mind’s  focus  on  stress.  To  color  the  images,  select  the  color  corresponding  to  each  number  on  the  color  bar,  and  then  tap  to  fill  in  each  numbered  area  in  the  drawing.   </string>
+    <string name="textodistract">This  mini  game  is  designed  to  distract  you  from  your  anxieties  and  worries.  When  the  game  begins,  tap  the  squares  that  light  up  until  the  song  ends.  Careful-  If  you  do  not  tap  the  correct  tile,  the  game  will  end!  </string>
+    <string name="textoinpire">Music  has  the  powerful  ability  to  distract  and  settle  the  mind.  Uplifting  music  helps  divert  focus  on  anxiety,  while  relaxing  music  settles  and  calms  the  mind.  Select  the  buttons  with  the  type  of  music  you’d  like  to  hear.  </string>
+    <string name="textorelax">Meditation  has  been  found  to  be  extremely  useful  in  reducing  stress  and  anxiety.  Use  the  slide  bar  to  indicate  your  current  stress  level,  and  follow  along  with  the  meditation  provided.    </string>
 </resources>

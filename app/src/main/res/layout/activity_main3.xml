@@ -9,23 +9,48 @@
     tools:context=".Main3Activity">
 
     <ImageButton
-        android:id="@+id/btnMusicFast"
+        android:onClick="fastmusic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_marginStart="74dp"
 
         android:layout_marginTop="13dp"
-        android:background="@drawable/fast_button" />
+        android:background="@drawable/fastbutton"
+        tools:ignore="OnClick" />
 
     <ImageButton
-        android:id="@+id/btnMusicSlow"
+        android:onClick="slowmusic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="18dp"
         android:layout_marginEnd="71dp"
-        android:background="@drawable/slow_button" />
+        android:background="@drawable/slowbutton"
+        tools:ignore="OnClick" />
+
+    <Button
+        android:onClick="stop"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="176dp"
+        android:layout_marginTop="198dp"
+        android:background="@drawable/stop"
+        tools:ignore="OnClick" />
+
+
+    <Button
+        android:onClick="pause"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="120dp"
+        android:layout_marginTop="200dp"
+        android:background="@drawable/pause"
+        tools:ignore="OnClick" />
 </RelativeLayout>
 

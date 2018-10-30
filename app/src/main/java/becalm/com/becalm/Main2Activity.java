@@ -28,21 +28,21 @@ public class Main2Activity extends AppCompatActivity {
         btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main2Activity.this,Main3Activity.class);
+                Intent intent = new Intent(Main2Activity.this,intermedio.class);
                 startActivity(intent);
             }
         });
         btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main2Activity.this,Main4Activity.class);
+                Intent intent = new Intent(Main2Activity.this,intermedio_distract.class);
                 startActivity(intent);
             }
         });
         btn3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main2Activity.this,Main5Activity.class);
+                Intent intent = new Intent(Main2Activity.this,IntermedioFocus.class);
                 startActivity(intent);
             }
         });

@@ -3,11 +3,14 @@ package becalm.com.becalm;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.media.MediaPlayer;
+import android.os.CountDownTimer;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.Random;
 
@@ -15,7 +18,7 @@ public class Main4Activity extends AppCompatActivity {
 
     private Button btn_color,btn_color1,btn_color2,btn_color3,btn_color4,btn_color5,btn_color6,btn_color7,btn_color8,btn_color9;
 
-    MediaPlayer mp2;
+    MediaPlayer mp,mp2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -148,11 +151,18 @@ public class Main4Activity extends AppCompatActivity {
 
     private void colorRandomForButton(Button btn_color4) {
         Random random = new Random();
-
-        int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(257));
-
+    int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(257));
         btn_color4.setBackgroundColor(color);
+        Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show();
+        mp = MediaPlayer.create(this,R.raw.tryagain);
+        if (mp.isPlaying()){
+            mp.pause();
+        }else{
+            mp.start();
+        }
     }
+
+
     private void playMusic(){
         mp2 = MediaPlayer.create(this,R.raw.cancion_inicial);
         if (mp2.isPlaying()){

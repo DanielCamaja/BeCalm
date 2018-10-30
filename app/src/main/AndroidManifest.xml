@@ -22,7 +22,12 @@
         <activity android:name=".Main4Activity" />
         <activity android:name=".Main5Activity" />
         <activity android:name=".Main6Activity" />
-        <activity android:name=".Main3Activity"></activity>
+        <activity android:name=".Main3Activity" />
+        <activity android:name=".intermedio" />
+        <activity android:name=".intermedio_distract" />
+        <activity
+            android:name=".IntermedioFocus"
+            android:label="@string/title_activity_intermedio_focus" />
     </application>
 
 </manifest>
