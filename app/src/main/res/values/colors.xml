@@ -4,4 +4,10 @@
     <color name="colorAccent">#EC7063</color>
     <color name="yellow">#fdf4af</color>
     <color name="white">#FAFAF8</color>
+    <color name="verde">#FF00FF00</color>
+
+    <color name="rojo">#FFFF0000</color>
+
+    <color name="azul">#FF0000FF</color>
+    <color name="negro">#FF000000</color>
 </resources>

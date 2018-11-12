@@ -1,17 +1,13 @@
-package becalm.com.becalm;
+package becalm.com.becalm.intermedial;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.MediaController;
-import android.widget.TextView;
-import android.widget.VideoView;
+
+import becalm.com.becalm.Main5Activity;
+import becalm.com.becalm.R;
 
 public class IntermedioFocus extends AppCompatActivity {
 

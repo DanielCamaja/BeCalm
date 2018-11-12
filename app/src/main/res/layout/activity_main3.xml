@@ -8,49 +8,50 @@
     android:layout_height="match_parent"
     tools:context=".Main3Activity">
 
-    <ImageButton
-        android:onClick="fastmusic"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_marginStart="74dp"
-
-        android:layout_marginTop="13dp"
-        android:background="@drawable/fastbutton"
-        tools:ignore="OnClick" />
 
     <ImageButton
-        android:onClick="slowmusic"
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_marginTop="18dp"
-        android:layout_marginEnd="71dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="209dp"
         android:background="@drawable/slowbutton"
+        android:onClick="slowmusic"
         tools:ignore="OnClick" />
 
-    <Button
-        android:onClick="stop"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <ImageButton
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="176dp"
-        android:layout_marginTop="198dp"
-        android:background="@drawable/stop"
+        android:layout_marginStart="200dp"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/fastbutton"
+        android:onClick="fastmusic"
         tools:ignore="OnClick" />
 
 
     <Button
-        android:onClick="pause"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="120dp"
+        android:layout_marginStart="209dp"
         android:layout_marginTop="200dp"
+        android:background="@drawable/stop"
+        android:onClick="stop"
+        tools:ignore="OnClick" />
+
+
+    <Button
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="81dp"
+        android:layout_marginTop="195dp"
         android:background="@drawable/pause"
+        android:onClick="pause"
         tools:ignore="OnClick" />
 </RelativeLayout>
 

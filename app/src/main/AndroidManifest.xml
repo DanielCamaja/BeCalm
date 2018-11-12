@@ -3,6 +3,7 @@
     package="becalm.com.becalm">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -11,24 +12,42 @@
         android:roundIcon="@mipmap/logo_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".MainActivity">
+        <activity
+            android:name=".MainActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Main2Activity" />
-        <activity android:name=".Main4Activity" />
-        <activity android:name=".Main5Activity" />
-        <activity android:name=".Main6Activity" />
-        <activity android:name=".Main3Activity" />
-        <activity android:name=".intermedio" />
-        <activity android:name=".intermedio_distract" />
         <activity
-            android:name=".IntermedioFocus"
-            android:label="@string/title_activity_intermedio_focus" />
-        <activity android:name=".IntermedioRelax"></activity>
+            android:name=".Main2Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Main4Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Main6Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".Main3Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".intermedial.intermedio"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".intermedial.intermedio_distract"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".intermedial.IntermedioFocus"
+            android:label="@string/title_activity_intermedio_focus"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".intermedial.IntermedioRelax"
+            android:screenOrientation="portrait" />
+        <activity android:name=".Main5Activity" />
+        <activity android:name=".fragment.FragmentPrueba"></activity>
     </application>
 
 </manifest>

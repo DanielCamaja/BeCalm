@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/fondo"
+    android:background="@drawable/cuadricula"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Main4Activity">
@@ -10,97 +10,139 @@
 
     <Button
         android:id="@+id/button0"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="3dp" />
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="-5dp" />
 
     <Button
         android:id="@+id/button1"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="123dp"
-        android:layout_marginTop="3dp" />
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="-5dp" />
 
 
     <Button
         android:id="@+id/btncolor2"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="244dp"
-        android:layout_marginTop="2dp" />
+        android:layout_marginStart="237dp"
+        android:layout_marginTop="-5dp" />
 
 
     <Button
         android:id="@+id/btncolor3"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="125dp" />
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="135dp" />
 
 
     <Button
         android:id="@+id/btncolor4"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="123dp"
-        android:layout_marginTop="126dp" />
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="135dp" />
 
     <Button
         android:id="@+id/btncolor5"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="245dp"
-        android:layout_marginTop="125dp" />
+        android:layout_marginStart="237dp"
+        android:layout_marginTop="135dp" />
 
 
     <Button
         android:id="@+id/btncolor6"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="248dp" />
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="278dp" />
 
     <Button
         android:id="@+id/btncolor7"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="123dp"
-        android:layout_marginTop="250dp" />
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="278dp" />
 
     <Button
         android:id="@+id/btncolor8"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="246dp"
-        android:layout_marginTop="248dp" />
+        android:layout_marginStart="237dp"
+        android:layout_marginTop="278dp" />
+
+    <Button
+        android:id="@+id/btncolor10"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="6dp"
+        android:layout_marginTop="420dp" />
+
+    <Button
+        android:id="@+id/btncolor11"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="121dp"
+        android:layout_marginTop="420dp" />
+
+    <Button
+        android:id="@+id/btncolor12"
+        android:layout_width="117dp"
+        android:layout_height="150dp"
+        android:background="@null"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="237dp"
+        android:layout_marginTop="420dp"
+
+        />
+
 
     <Button
         android:id="@+id/btncolor9"
-        android:layout_width="131dp"
-        android:layout_height="136dp"
+        android:layout_width="114dp"
+        android:layout_height="138dp"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_marginStart="133dp"
-        android:layout_marginTop="396dp"
+        android:layout_marginStart="123dp"
+        android:layout_marginTop="428dp"
         android:background="@color/colorAccent" />
 
 </RelativeLayout>

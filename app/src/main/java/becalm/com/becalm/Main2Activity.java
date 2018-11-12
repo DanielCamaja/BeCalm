@@ -7,6 +7,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import becalm.com.becalm.intermedial.IntermedioFocus;
+import becalm.com.becalm.intermedial.IntermedioRelax;
+import becalm.com.becalm.intermedial.intermedio;
+import becalm.com.becalm.intermedial.intermedio_distract;
+
 public class Main2Activity extends AppCompatActivity {
 
 
@@ -49,7 +55,7 @@ public class Main2Activity extends AppCompatActivity {
         btn4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Main2Activity.this,Main6Activity.class);
+                Intent intent = new Intent(Main2Activity.this,IntermedioRelax.class);
                 startActivity(intent);
             }
         });

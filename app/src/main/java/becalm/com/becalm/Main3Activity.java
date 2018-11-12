@@ -24,7 +24,7 @@ public class Main3Activity extends AppCompatActivity {
 
     public void slowmusic(View view) {
      if (mp0 == null){
-         mp0 = MediaPlayer.create(this, R.raw.segundo);
+         mp0 = MediaPlayer.create(this, R.raw.primero);
          mp0.start();
          Toast.makeText(this, "inico", Toast.LENGTH_SHORT).show();
      }else if (!mp0.isPlaying()){
@@ -37,7 +37,7 @@ public class Main3Activity extends AppCompatActivity {
 
     public void fastmusic(View view) {
         if (mp1 == null){
-            mp1 = MediaPlayer.create(this, R.raw.primero);
+            mp1 = MediaPlayer.create(this, R.raw.segundo);
             mp1.start();
             Toast.makeText(this, "inico", Toast.LENGTH_SHORT).show();
         }else if (!mp1.isPlaying()){
