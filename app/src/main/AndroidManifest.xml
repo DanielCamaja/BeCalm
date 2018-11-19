@@ -47,7 +47,9 @@
             android:name=".intermedial.IntermedioRelax"
             android:screenOrientation="portrait" />
         <activity android:name=".Main5Activity" />
-        <activity android:name=".fragment.FragmentPrueba"></activity>
+        <activity android:name=".fragment.Stress" />
+        <activity android:name=".fragment.MediumStress" />
+        <activity android:name=".fragment.HardStress"></activity>
     </application>
 
 </manifest>
