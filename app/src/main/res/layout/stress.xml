@@ -7,4 +7,13 @@
     android:background="@drawable/fondo"
     tools:context=".fragment.Stress">
 
+    <Button
+        android:id="@+id/stressbutton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/presion"
+        tools:layout_editor_absoluteX="142dp"
+        tools:layout_editor_absoluteY="220dp"
+        tools:ignore="MissingConstraints" />
+
 </android.support.constraint.ConstraintLayout>

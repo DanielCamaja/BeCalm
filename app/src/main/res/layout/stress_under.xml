@@ -6,4 +6,13 @@
     android:background="@drawable/fondo"
     tools:context=".fragment.UnderStress">
 
+    <Button
+        android:id="@+id/understressbutton"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@drawable/presion"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="214dp" />
+
 </RelativeLayout>
