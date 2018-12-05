@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import becalm.com.becalm.R;
 
@@ -30,15 +31,20 @@ public class UnderStress extends Fragment {
         v = inflater.inflate(R.layout.stress_under, container, false);
 
         comenzar = (Button) v.findViewById(R.id.understressbutton);
+        understress = MediaPlayer.create(getActivity(),R.raw.meditacion);
         comenzar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                understress = MediaPlayer.create(getActivity(), R.raw.meditacion);
                 if (understress.isPlaying()){
                     understress.pause();
+                    comenzar.setBackground(getActivity().getDrawable(R.drawable.play));
+                    Toast.makeText(getActivity(), "Pause", Toast.LENGTH_SHORT).show();
                 }else{
                     understress.start();
+                    comenzar.setBackground(getActivity().getDrawable(R.drawable.pause));
+                    Toast.makeText(getActivity(), "Play", Toast.LENGTH_SHORT).show();
                 }
+
             }
 
         });
