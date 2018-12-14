@@ -3,7 +3,6 @@ package becalm.com.becalm;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.os.Handler;
-import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -31,6 +30,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Locale;
 
+import androidx.fragment.app.FragmentActivity;
+
 public class Main3Activity extends FragmentActivity {
 
     private static final String TAG = Main3Activity.class.getSimpleName();
@@ -40,8 +41,8 @@ public class Main3Activity extends FragmentActivity {
 
     private static final String TRACK_URI = "spotify:track:1UBQ5GK8JaQjm5VbkBZY66";
     private static final String ALBUM_URI = "spotify:album:1x0uzT3ETlIYjPueTyNfnQ";
-    private static final String ARTIST_URI = "spotify:artist:3WrFJ7ztbogyGnTHbHJFl2";
-    private static final String PLAYLIST_URI = "spotify:user:orimuraichika01:playlist:5chzqShKFfzIl2u3ynGq8D";
+    private static final String ARTIST_URI = "spotify:user:orimuraichika01:playlist:3rDRbzQ9h5uWjjIZ7YqSln";
+    private static final String PLAYLIST_URI = "spotify:user:orimuraichika01:playlist:1HDaj5Do65wq0RNPWFZa6k";
 
     private SpotifyAppRemote mSpotifyAppRemote;
 

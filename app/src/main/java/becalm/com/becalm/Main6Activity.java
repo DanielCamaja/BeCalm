@@ -1,10 +1,12 @@
 package becalm.com.becalm;
 
-import android.support.design.widget.TabLayout;
-import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import com.google.android.material.tabs.TabLayout;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
 import becalm.com.becalm.fragment.HardStress;
 import becalm.com.becalm.fragment.MediumStress;
 import becalm.com.becalm.fragment.UnderStress;
@@ -16,6 +18,7 @@ public class Main6Activity extends AppCompatActivity {
     private TabLayout tabb1;
     private ViewPager viewPager;
     private ViewPagerAdapter adapter;
+    @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

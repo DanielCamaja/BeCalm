@@ -2,15 +2,15 @@ package becalm.com.becalm.fragment;
 
 import android.media.MediaPlayer;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 import becalm.com.becalm.R;
 
 public class UnderStress extends Fragment {
@@ -22,7 +22,11 @@ public class UnderStress extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        understress.stop();
+        if (understress != null){
+            understress.stop();
+            understress.release();
+            understress = null;
+        }
     }
 
     @Nullable
