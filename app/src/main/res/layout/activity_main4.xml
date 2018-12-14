@@ -8,6 +8,14 @@
     android:layout_height="match_parent"
     tools:context=".Main4Activity">
 
+    <TextView
+        android:id="@+id/textscore"
+        android:layout_width="100dp"
+        android:layout_height="30dp"
+        android:text="SCORRE:   0"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="21dp"
+        android:layout_toEndOf="@+id/button0" />
 
     <Button
         android:id="@+id/button0"

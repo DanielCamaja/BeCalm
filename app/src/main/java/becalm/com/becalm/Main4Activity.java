@@ -1,5 +1,7 @@
 package becalm.com.becalm;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.media.MediaPlayer;
@@ -7,6 +9,7 @@ import android.os.Bundle;
 import android.view.Display;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
@@ -16,13 +19,18 @@ import androidx.appcompat.app.AppCompatActivity;
 public class Main4Activity extends AppCompatActivity {
 
     private Button btn_color,btn_color1,btn_color2,btn_color3,btn_color4,btn_color5,btn_color6,btn_color7,btn_color8,btn_color10,btn_color11,btn_color12,btn_color9;
-
     MediaPlayer mp,mp2;
+    TextView tv_score;
+    int score = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+
+        tv_score = (TextView)findViewById(R.id.textscore);
+        tv_score.setText("SCORE: " + score);
 
         btn_color = findViewById(R.id.button0);
         btn_color1 = findViewById(R.id.button1);
@@ -148,6 +156,8 @@ public class Main4Activity extends AppCompatActivity {
         btn_color9.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                score++;
+                tv_score.setText("SCORE: " + score);
 
                 //colorRandomForButton(btn_color7);
                 int randX = (int)(Math.random()*3);
@@ -183,6 +193,14 @@ public class Main4Activity extends AppCompatActivity {
 
     private void colorRandomForButton(Button btn_color4) {
         Random random = new Random();
+        SharedPreferences preferences = getSharedPreferences("PREFS", 0);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putInt("lastScore", score);
+        editor.apply();
+
+        Intent intent = new Intent(Main4Activity.this, Main7Activity.class);
+        startActivity(intent);
+        finish();
     //int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(257));
       //  btn_color4.setBackgroundColor(color);
 

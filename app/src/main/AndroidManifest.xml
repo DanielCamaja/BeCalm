@@ -51,7 +51,8 @@
         <activity android:name=".Main5Activity" />
         <activity android:name=".fragment.Stress" />
         <activity android:name=".fragment.MediumStress" />
-        <activity android:name=".fragment.HardStress"></activity>
+        <activity android:name=".fragment.HardStress" />
+        <activity android:name=".Main7Activity"></activity>
     </application>
 
 </manifest>
