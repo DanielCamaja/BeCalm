@@ -46,10 +46,7 @@ public class Main3Activity extends FragmentActivity {
 
     private SpotifyAppRemote mSpotifyAppRemote;
 
-    private TextView mPlayerStateView;
-    private TextView mPlayerContextView;
     private TextView mRecentErrorView;
-    private TextView mCapabilitiesView;
     private ImageView mImageView;
 
     private Button mConnect;
@@ -67,57 +64,12 @@ public class Main3Activity extends FragmentActivity {
     private class TrackProgressBar {
 
         private static final int LOOP_DURATION = 500;
-        private final SeekBar mSeekBar;
         private final Handler mHandler;
 
-
-        private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                mSpotifyAppRemote.getPlayerApi().seekTo(seekBar.getProgress())
-                        .setErrorCallback(mErrorCallback);
-            }
-        };
-
-        private final Runnable mSeekRunnable = new Runnable() {
-            @Override
-            public void run() {
-                int progress = mSeekBar.getProgress();
-                mSeekBar.setProgress(progress + LOOP_DURATION);
-                mHandler.postDelayed(mSeekRunnable, LOOP_DURATION);
-            }
-        };
-
         private TrackProgressBar(SeekBar seekBar) {
-            mSeekBar = seekBar;
-            mSeekBar.setOnSeekBarChangeListener(mSeekBarChangeListener);
             mHandler = new Handler();
         }
 
-        private void setDuration(long duration) {
-            mSeekBar.setMax((int) duration);
-        }
-
-        private void update(long progress) {
-            mSeekBar.setProgress((int) progress);
-        }
-
-        private void pause() {
-            mHandler.removeCallbacks(mSeekRunnable);
-        }
-
-        private void unpause() {
-            mHandler.removeCallbacks(mSeekRunnable);
-            mHandler.postDelayed(mSeekRunnable, LOOP_DURATION);
-        }
     }
 
     @SuppressLint("SetTextI18n")
@@ -127,13 +79,6 @@ public class Main3Activity extends FragmentActivity {
             mToggleRepeatButton.setText(getString(R.string.toggle_repeat_button) + " " + data.playbackOptions.repeatMode);
             mToggleShuffleButton.setText(getString(R.string.toggle_shuffle_button) + " " + data.playbackOptions.isShuffling);
 
-            mPlayerStateView.setText(String.format(Locale.US, "%d:%s", System.currentTimeMillis(), data));
-
-            if (data.playbackSpeed > 0) {
-                mTrackProgressBar.unpause();
-            } else {
-                mTrackProgressBar.pause();
-            }
 
             if (data.track != null) {
 
@@ -141,26 +86,13 @@ public class Main3Activity extends FragmentActivity {
                         .getImage(data.track.imageUri)
                         .setResultCallback(bitmap -> mImageView.setImageBitmap(bitmap));
 
-                mTrackProgressBar.setDuration(data.track.duration);
-                mTrackProgressBar.update(data.playbackPosition);
 
-                mSeekBar.setEnabled(true);
-            } else {
-                mSeekBar.setEnabled(false);
             }
         }
     };
 
-    @SuppressLint("SetTextI18n")
-    private final Subscription.EventCallback<PlayerContext> mPlayerContextEventCallback = new Subscription.EventCallback<PlayerContext>() {
-        @Override
-        public void onEvent(PlayerContext data) {
-            mPlayerContextView.setText(String.format(Locale.US, "%d:%s", System.currentTimeMillis(), data));
-        }
-    };
 
     private List<View> mViews;
-    private SeekBar mSeekBar;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -168,29 +100,9 @@ public class Main3Activity extends FragmentActivity {
         setContentView(R.layout.activity_main3);
 
         mConnect = findViewById(R.id.connect);
-        mPlayerStateView = findViewById(R.id.current_track);
-        mPlayerContextView = findViewById(R.id.current_context);
-        mCapabilitiesView = findViewById(R.id.capabilities);
         mToggleShuffleButton = findViewById(R.id.toggle_shuffle_button);
         mToggleRepeatButton = findViewById(R.id.toggle_repeat_button);
-        mRecentErrorView = findViewById(R.id.recent_error);
-        mImageView = findViewById(R.id.image);
 
-        mSeekBar = findViewById(R.id.seek_to);
-        mSeekBar.setEnabled(false);
-
-        EditText seekInput = findViewById(R.id.seek_input);
-        seekInput.setOnEditorActionListener((textView, actionId, keyEvent) -> {
-            boolean handled = false;
-            if (actionId == EditorInfo.IME_ACTION_DONE) {
-                mSpotifyAppRemote.getPlayerApi().seekTo(Long.parseLong(textView.getText().toString()))
-                        .setErrorCallback(mErrorCallback);
-                handled = true;
-            }
-            return handled;
-        });
-
-        mTrackProgressBar = new TrackProgressBar(mSeekBar);
 
         mViews = Arrays.asList(
                 findViewById(R.id.disconnect),
@@ -215,9 +127,7 @@ public class Main3Activity extends FragmentActivity {
                 findViewById(R.id.connect_switch_to_local),
                 findViewById(R.id.subscribe_to_player_state),
                 findViewById(R.id.subscribe_to_player_context),
-                findViewById(R.id.echo),
-                mSeekBar,
-                seekInput);
+                findViewById(R.id.echo));
 
         SpotifyAppRemote.setDebugMode(true);
 
@@ -242,9 +152,6 @@ public class Main3Activity extends FragmentActivity {
             view.setEnabled(false);
         }
         mConnect.setEnabled(true);
-        mImageView.setImageBitmap(null);
-        mRecentErrorView.setText(null);
-        mPlayerStateView.setText(null);
     }
 
     public void onConnectClicked(View v) {
@@ -384,7 +291,6 @@ public class Main3Activity extends FragmentActivity {
 
         mCapabilitiesSubscription = (Subscription<Capabilities>) mSpotifyAppRemote.getUserApi()
                 .subscribeToCapabilities()
-                .setEventCallback(capabilities -> mCapabilitiesView.setText("ON_DEMAND: " + capabilities.canPlayOnDemand))
                 .setErrorCallback(mErrorCallback);
 
         mSpotifyAppRemote.getUserApi()
@@ -482,7 +388,6 @@ public class Main3Activity extends FragmentActivity {
 
         mPlayerContextSubscription = (Subscription<PlayerContext>) mSpotifyAppRemote.getPlayerApi()
                 .subscribeToPlayerContext()
-                .setEventCallback(mPlayerContextEventCallback)
                 .setErrorCallback(mErrorCallback);
     }
 
@@ -496,7 +401,6 @@ public class Main3Activity extends FragmentActivity {
     private void logError(Throwable t, String msg) {
         Toast.makeText(this, "Error: " + msg, Toast.LENGTH_SHORT).show();
         Log.e(TAG, msg, t);
-        mRecentErrorView.setText(String.valueOf(t));
     }
 
     private void logMessage(String msg) {
