@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "426642211533",
+    "firebase_url": "https://becalm-7e6eb.firebaseio.com",
+    "project_id": "becalm-7e6eb",
+    "storage_bucket": "becalm-7e6eb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:426642211533:android:15f6f3169c1df59d",
+        "android_client_info": {
+          "package_name": "becalm.com.becalm"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "426642211533-p0nu2ohblks9nr80g4kukqn8cdsedjq6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "becalm.com.becalm",
+            "certificate_hash": "b1a82e5d31e1e11e9cf89265069fc424f8d812d4"
+          }
+        },
+        {
+          "client_id": "426642211533-2q7g2s5o2014licv4bs7k9n1biiccnvq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCcUz5quCbd-iPd9GvpMdSO-KiLpzzvKNg"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "426642211533-2q7g2s5o2014licv4bs7k9n1biiccnvq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
