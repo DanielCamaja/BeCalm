@@ -1,10 +1,12 @@
 package becalm.com.becalm;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.Point;
 import android.media.MediaPlayer;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Display;
 import android.view.LayoutInflater;
@@ -35,6 +37,9 @@ public class Main4Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+        time time = new time();
+        time.execute();
+
 
         resultado  = (TextView)findViewById(R.id.resultado);
         SharedPreferences preferences = getSharedPreferences("PREFS", 0);
@@ -90,39 +95,6 @@ public class Main4Activity extends AppCompatActivity {
         btn_color11 = findViewById(R.id.btncolor11);
         btn_color12 = findViewById(R.id.btncolor12);
         btn_color9 = findViewById(R.id.btncolor9);
-
-
-        Display display = getWindowManager(). getDefaultDisplay();
-        Point size = new Point();
-        display. getSize(size);
-        int width = size.x;
-        int Height = size.y;
-        final int cellSizeX = (int)(width / 3.0);
-        final int cellSizeY = (int)(Height / 4.19);
-        btn_color.setWidth(cellSizeX);
-        btn_color.setHeight(cellSizeY);
-        btn_color1.setWidth(cellSizeX);
-        btn_color1.setHeight(cellSizeY);
-        btn_color2.setWidth(cellSizeX);
-        btn_color2.setHeight(cellSizeY);
-        btn_color3.setWidth(cellSizeX);
-        btn_color3.setHeight(cellSizeY);
-        btn_color4.setWidth(cellSizeX);
-        btn_color4.setHeight(cellSizeY);
-        btn_color5.setWidth(cellSizeX);
-        btn_color5.setHeight(cellSizeY);
-        btn_color6.setWidth(cellSizeX);
-        btn_color6.setHeight(cellSizeY);
-        btn_color7.setWidth(cellSizeX);
-        btn_color7.setHeight(cellSizeY);
-        btn_color8.setWidth(cellSizeX);
-        btn_color8.setHeight(cellSizeY);
-        btn_color10.setWidth(cellSizeX);
-        btn_color10.setHeight(cellSizeY);
-        btn_color11.setWidth(cellSizeX);
-        btn_color11.setHeight(cellSizeY);
-        btn_color12.setWidth(cellSizeX);
-        btn_color12.setHeight(cellSizeY);
 
 
         btn_color.setOnClickListener(new View.OnClickListener() {
@@ -203,14 +175,11 @@ public class Main4Activity extends AppCompatActivity {
             public void onClick(View v) {
                 score++;
                 tv_score.setText("SCORE: " + score);
+                movimiento();
 
-                //colorRandomForButton(btn_color7);
-                int randX = (int)(Math.random()*3);
-                int randY = (int)(Math.random()*4);
-                btn_color9.setX(randX*cellSizeX);
-                btn_color9.setY(randY*cellSizeY);
 
             }
+
         });
         btn_color10.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -236,13 +205,11 @@ public class Main4Activity extends AppCompatActivity {
 
             }
         });
+
+
     }
 
     private void colorRandomForButton(Button btn_color4) {
- /*       RelativeLayout contenedor = (RelativeLayout) findViewById(R.id.verscore);
-        LayoutInflater layoutInflater = LayoutInflater.from(this);
-        View laViewInflada = layoutInflater.inflate(R.layout.score, contenedor, true);
-*/
 
         Random random = new Random();
         SharedPreferences preferences = getSharedPreferences("PREFS", 0);
@@ -253,9 +220,6 @@ public class Main4Activity extends AppCompatActivity {
         Intent intent = new Intent(Main4Activity.this, Main7Activity.class);
         startActivity(intent);
 
-    //int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(257));
-      //  btn_color4.setBackgroundColor(color);
-
         Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show();
         mp = MediaPlayer.create(this,R.raw.tryagain);
         if (mp.isPlaying()){
@@ -263,6 +227,50 @@ public class Main4Activity extends AppCompatActivity {
         }else{
             mp.start();
         }
+    }
+
+    private void movimiento(){
+
+        Display display = getWindowManager(). getDefaultDisplay();
+        Point size = new Point();
+        display. getSize(size);
+        int width = size.x;
+        int Height = size.y;
+        final int cellSizeX = (int)(width / 3.0);
+        final int cellSizeY = (int)(Height / 4.19);
+        btn_color.setWidth(cellSizeX);
+        btn_color.setHeight(cellSizeY);
+        btn_color1.setWidth(cellSizeX);
+        btn_color1.setHeight(cellSizeY);
+        btn_color2.setWidth(cellSizeX);
+        btn_color2.setHeight(cellSizeY);
+        btn_color3.setWidth(cellSizeX);
+        btn_color3.setHeight(cellSizeY);
+        btn_color4.setWidth(cellSizeX);
+        btn_color4.setHeight(cellSizeY);
+        btn_color5.setWidth(cellSizeX);
+        btn_color5.setHeight(cellSizeY);
+        btn_color6.setWidth(cellSizeX);
+        btn_color6.setHeight(cellSizeY);
+        btn_color7.setWidth(cellSizeX);
+        btn_color7.setHeight(cellSizeY);
+        btn_color8.setWidth(cellSizeX);
+        btn_color8.setHeight(cellSizeY);
+        btn_color10.setWidth(cellSizeX);
+        btn_color10.setHeight(cellSizeY);
+        btn_color11.setWidth(cellSizeX);
+        btn_color11.setHeight(cellSizeY);
+        btn_color12.setWidth(cellSizeX);
+        btn_color12.setHeight(cellSizeY);
+
+        int randX = (int)(Math.random()*3);
+        int randY = (int)(Math.random()*4);
+        btn_color9.setX(randX*cellSizeX);
+        btn_color9.setY(randY*cellSizeY);
+
+
+
+
     }
 
 
@@ -286,4 +294,42 @@ public class Main4Activity extends AppCompatActivity {
         super.onResume();
         playMusic();
     }
+    public void hilo(){
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+    public void ejecutar(){
+        time time = new time();
+        time.execute();
+    }
+
+    public class time extends AsyncTask<Void,Integer,Boolean>{
+
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            for (int i=1; i<3;i++)
+            {
+                hilo();
+            }
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            ejecutar();
+            movimiento();
+        }
+    }
+
+
+
+
+
+
+
 }
+
