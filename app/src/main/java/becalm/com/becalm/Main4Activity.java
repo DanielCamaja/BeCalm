@@ -7,20 +7,27 @@ import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.Display;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.RecyclerView;
 
 public class Main4Activity extends AppCompatActivity {
 
     private Button btn_color,btn_color1,btn_color2,btn_color3,btn_color4,btn_color5,btn_color6,btn_color7,btn_color8,btn_color10,btn_color11,btn_color12,btn_color9;
     MediaPlayer mp,mp2;
     TextView tv_score;
+    TextView resultado;
+    int lastScore;
+    int best1, best2, best3;
+
     int score = 0;
 
 
@@ -28,6 +35,44 @@ public class Main4Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main4);
+
+        resultado  = (TextView)findViewById(R.id.resultado);
+        SharedPreferences preferences = getSharedPreferences("PREFS", 0);
+        lastScore = preferences.getInt("lastScore", 0);
+        best1 = preferences.getInt("best1", 0);
+        best2 = preferences.getInt("best2", 0);
+        best3 = preferences.getInt("best3", 0);
+
+        if (lastScore > best3){
+            best3 = lastScore;
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("best3", best3);
+            editor.apply();
+        }
+        if (lastScore > best2){
+            int temp = best2;
+            best2 = lastScore;
+            best3 = temp;
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("best3", best3);
+            editor.putInt("best2", best2);
+            editor.apply();
+        }
+
+        if (lastScore > best1){
+            int temp = best1;
+            best1 = lastScore;
+            best2 = temp;
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("best2", best2);
+            editor.putInt("best1", best1);
+            editor.apply();
+        }
+
+
+
+
+
 
         tv_score = (TextView)findViewById(R.id.textscore);
         tv_score.setText("SCORE: " + score);
@@ -174,14 +219,16 @@ public class Main4Activity extends AppCompatActivity {
                 colorRandomForButton(btn_color10);
 
             }
-        }); btn_color11.setOnClickListener(new View.OnClickListener() {
+        });
+        btn_color11.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 colorRandomForButton(btn_color11);
 
             }
-        }); btn_color12.setOnClickListener(new View.OnClickListener() {
+        });
+        btn_color12.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
@@ -192,6 +239,11 @@ public class Main4Activity extends AppCompatActivity {
     }
 
     private void colorRandomForButton(Button btn_color4) {
+ /*       RelativeLayout contenedor = (RelativeLayout) findViewById(R.id.verscore);
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
+        View laViewInflada = layoutInflater.inflate(R.layout.score, contenedor, true);
+*/
+
         Random random = new Random();
         SharedPreferences preferences = getSharedPreferences("PREFS", 0);
         SharedPreferences.Editor editor = preferences.edit();
@@ -200,7 +252,7 @@ public class Main4Activity extends AppCompatActivity {
 
         Intent intent = new Intent(Main4Activity.this, Main7Activity.class);
         startActivity(intent);
-        finish();
+
     //int color = Color.argb(255, random.nextInt(256), random.nextInt(256), random.nextInt(257));
       //  btn_color4.setBackgroundColor(color);
 

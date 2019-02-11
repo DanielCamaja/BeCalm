@@ -8,14 +8,10 @@
     android:background="@drawable/fondo"
     tools:context=".fragment.HardStress">
 
-    <TextView
+    <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="30dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="1dp"
-        android:text="Please press the play button to begin the meditation"
-        android:textColor="@color/white"
+        android:layout_height="38dp"
+        android:background="@drawable/please"
         />
 
     <Button

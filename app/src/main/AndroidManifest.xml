@@ -5,6 +5,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -53,6 +54,9 @@
         <activity android:name=".fragment.MediumStress" />
         <activity android:name=".fragment.HardStress" />
         <activity android:name=".Main7Activity"></activity>
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="15c2d0df8f251c84e48eda43be168a36ee04f35f" />
     </application>
 
 </manifest>
