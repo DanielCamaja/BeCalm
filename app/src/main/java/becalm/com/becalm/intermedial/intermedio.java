@@ -8,7 +8,7 @@ import android.widget.MediaController;
 import android.widget.VideoView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import becalm.com.becalm.Main3Activity;
+import becalm.com.becalm.InspireActivity;
 import becalm.com.becalm.R;
 
 public class intermedio extends AppCompatActivity {
@@ -21,14 +21,14 @@ public class intermedio extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_intermedio);
+        setContentView(R.layout.activity_intermedio_inspire);
 
 
         btnir = (Button) findViewById(R.id.intermedialboton);
         btnir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(intermedio.this, Main3Activity.class);
+                Intent intent = new Intent(intermedio.this, InspireActivity.class);
                 startActivity(intent);
             }
         });

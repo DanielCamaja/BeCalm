@@ -17,9 +17,9 @@ import java.util.List;
 
 import androidx.fragment.app.FragmentActivity;
 
-public class Main3Activity extends FragmentActivity {
+public class InspireActivity extends FragmentActivity {
 
-    private static final String TAG = Main3Activity.class.getSimpleName();
+    private static final String TAG = InspireActivity.class.getSimpleName();
 
     private static final String CLIENT_ID = "d8ac6bd313874183a554518bd511866f";
     private static final String REDIRECT_URI = "combecalm://callback";
@@ -46,7 +46,7 @@ public class Main3Activity extends FragmentActivity {
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main3);
+        setContentView(R.layout.activity_inspire);
 
         mConnect = findViewById(R.id.authorize);
         mConnect.setOnClickListener(new View.OnClickListener() {

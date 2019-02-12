@@ -1,27 +1,22 @@
 package becalm.com.becalm;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.graphics.Point;
 import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Display;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
 
-public class Main4Activity extends AppCompatActivity {
+public class DistractActivity extends AppCompatActivity {
 
     private Button btn_color,btn_color1,btn_color2,btn_color3,btn_color4,btn_color5,btn_color6,btn_color7,btn_color8,btn_color10,btn_color11,btn_color12,btn_color9;
     MediaPlayer mp,mp2;
@@ -36,7 +31,7 @@ public class Main4Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main4);
+        setContentView(R.layout.activity_distract);
         time time = new time();
         time.execute();
 
@@ -217,7 +212,7 @@ public class Main4Activity extends AppCompatActivity {
         editor.putInt("lastScore", score);
         editor.apply();
 
-        Intent intent = new Intent(Main4Activity.this, Main7Activity.class);
+        Intent intent = new Intent(DistractActivity.this, Main7Activity.class);
         startActivity(intent);
 
         Toast.makeText(this, "Try Again", Toast.LENGTH_SHORT).show();
@@ -311,7 +306,7 @@ public class Main4Activity extends AppCompatActivity {
 
         @Override
         protected Boolean doInBackground(Void... voids) {
-            for (int i=1; i<3;i++)
+            for (int i=1; i<2;i++)
             {
                 hilo();
             }

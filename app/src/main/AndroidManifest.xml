@@ -28,13 +28,13 @@
             android:name=".Main2Activity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Main4Activity"
+            android:name=".DistractActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Main6Activity"
+            android:name=".RelaxActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Main3Activity"
+            android:name=".InspireActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name=".intermedial.intermedio"
@@ -49,7 +49,7 @@
         <activity
             android:name=".intermedial.IntermedioRelax"
             android:screenOrientation="portrait" />
-        <activity android:name=".Main5Activity" />
+        <activity android:name=".FocusActivity" />
         <activity android:name=".fragment.Stress" />
         <activity android:name=".fragment.MediumStress" />
         <activity android:name=".fragment.HardStress" />

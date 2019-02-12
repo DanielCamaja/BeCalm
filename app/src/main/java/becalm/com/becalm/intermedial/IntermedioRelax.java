@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import becalm.com.becalm.Main6Activity;
+import becalm.com.becalm.RelaxActivity;
 import becalm.com.becalm.R;
 
 public class IntermedioRelax extends AppCompatActivity {
@@ -21,7 +21,7 @@ public class IntermedioRelax extends AppCompatActivity {
         btnrelax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IntermedioRelax.this, Main6Activity.class);
+                Intent intent = new Intent(IntermedioRelax.this, RelaxActivity.class);
                 startActivity(intent);
             }
         });

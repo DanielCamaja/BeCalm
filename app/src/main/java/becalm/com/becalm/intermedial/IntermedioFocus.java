@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import becalm.com.becalm.Main5Activity;
+import becalm.com.becalm.FocusActivity;
 import becalm.com.becalm.R;
 
 public class IntermedioFocus extends AppCompatActivity {
@@ -23,7 +23,7 @@ public class IntermedioFocus extends AppCompatActivity {
         botonfocus.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(IntermedioFocus.this,Main5Activity.class);
+                Intent intent = new Intent(IntermedioFocus.this, FocusActivity.class);
                 startActivity(intent);
                 finish();
             }

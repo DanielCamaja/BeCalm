@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import becalm.com.becalm.Main4Activity;
+import becalm.com.becalm.DistractActivity;
 import becalm.com.becalm.R;
 
 public class intermedio_distract extends AppCompatActivity {
@@ -22,7 +22,7 @@ public class intermedio_distract extends AppCompatActivity {
         boton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(intermedio_distract.this,Main4Activity.class);
+                Intent intent = new Intent(intermedio_distract.this, DistractActivity.class);
                 startActivity(intent);
             }
         });

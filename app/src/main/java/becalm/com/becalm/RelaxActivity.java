@@ -12,7 +12,7 @@ import becalm.com.becalm.fragment.MediumStress;
 import becalm.com.becalm.fragment.UnderStress;
 import becalm.com.becalm.fragment.Stress;
 
-public class Main6Activity extends AppCompatActivity {
+public class RelaxActivity extends AppCompatActivity {
 
 
     private TabLayout tabb1;
@@ -22,7 +22,7 @@ public class Main6Activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main6);
+        setContentView(R.layout.activity_relax);
 
 
         tabb1 = (TabLayout) findViewById(R.id.tab1id);

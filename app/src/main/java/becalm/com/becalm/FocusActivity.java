@@ -1,6 +1,5 @@
 package becalm.com.becalm;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -9,20 +8,15 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import com.github.chrisbanes.photoview.PhotoView;
-import com.google.android.material.tabs.TabLayout;
 
 import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Main5Activity extends AppCompatActivity implements View.OnClickListener {
+public class FocusActivity extends AppCompatActivity implements View.OnClickListener {
 
     ImageButton anaranjado;
     ImageButton rojo;
@@ -48,10 +42,10 @@ public class Main5Activity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main5);
+        setContentView(R.layout.activity_focus);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        //ActivityCompat.requestPermissions(Main5Activity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        //ActivityCompat.requestPermissions(FocusActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
 
         anaranjado = (ImageButton)findViewById(R.id.colornaranja);
         rojo = (ImageButton)findViewById(R.id.colorrojo);

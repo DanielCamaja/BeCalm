@@ -38,7 +38,7 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="40dp"
-        android:layout_marginEnd="23dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/btn_distract" />
 
     <Button
@@ -53,16 +53,12 @@
 
     <Button
         android:id="@+id/relax"
-        android:layout_width="160dp"
-        android:layout_height="160dp"
-        android:layout_alignParentStart="true"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="201dp"
-        android:layout_marginTop="271dp"
-        android:layout_marginEnd="23dp"
-        android:layout_marginBottom="136dp"
+        android:layout_marginTop="270dp"
+        android:layout_marginEnd="36dp"
         android:background="@drawable/btn_relax" />
 
     <ImageView

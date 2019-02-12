@@ -33,7 +33,7 @@ public class Main7Activity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent intent = new Intent(Main7Activity.this, Main4Activity.class);
+        Intent intent = new Intent(Main7Activity.this, DistractActivity.class);
         startActivity(intent);
         finish();
     }
