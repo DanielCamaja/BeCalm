@@ -82,4 +82,10 @@ public class Main2Activity extends AppCompatActivity {
         super.onResume();
         playMusic();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
 }

@@ -29,9 +29,9 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
 
     private static Lienzo lienzo;
     //private ImageView lienzo;
-    float ppequenyo;
-    float pmediano;
-    float pgrande;
+    float small;
+    float medium;
+    float big;
     float pdefecto;
 
     ImageButton trazo;
@@ -80,11 +80,11 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
         //lienzo =(ImageView) findViewById(R.id.lienzo);
 
 
-        ppequenyo= 10;
-        pmediano= 20;
-        pgrande= 30;
+        small= 10;
+        medium= 20;
+        big= 30;
 
-        pdefecto= pmediano;
+        pdefecto= medium;
 
 
     }
@@ -159,7 +159,7 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View v) {
                         Lienzo.setBorrado(false);
-                        Lienzo.setTamanyoPunto(ppequenyo);
+                        Lienzo.setTamanyoPunto(small);
 
                         tamanyopunto.dismiss();
                     }
@@ -169,7 +169,7 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View v) {
                         Lienzo.setBorrado(false);
-                        Lienzo.setTamanyoPunto(pmediano);
+                        Lienzo.setTamanyoPunto(medium);
 
                         tamanyopunto.dismiss();
                     }
@@ -179,7 +179,7 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View v) {
                         Lienzo.setBorrado(false);
-                        Lienzo.setTamanyoPunto(pgrande);
+                        Lienzo.setTamanyoPunto(big);
 
                         tamanyopunto.dismiss();
                     }
@@ -193,16 +193,16 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
 
 
                 AlertDialog.Builder newDialog = new AlertDialog.Builder(this);
-                newDialog.setTitle("Nuevo Dibujo");
-                newDialog.setMessage("¿Comenzar nuevo dibujo (perderás el dibujo actual)?");
-                newDialog.setPositiveButton("Aceptar", new DialogInterface.OnClickListener(){
+                newDialog.setTitle("New Draw");
+                newDialog.setMessage("Begin new drawing (will you lose the current drawing)?");
+                newDialog.setPositiveButton("Agree", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
 
                         lienzo.NuevoDibujo();
                         dialog.dismiss();
                     }
                 });
-                newDialog.setNegativeButton("Cancelar", new DialogInterface.OnClickListener(){
+                newDialog.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
                         dialog.cancel();
                     }
@@ -222,7 +222,7 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View v) {
                         Lienzo.setBorrado(true);
-                        Lienzo.setTamanyoPunto(ppequenyo);
+                        Lienzo.setTamanyoPunto(small);
 
                         borrarpunto.dismiss();
                     }
@@ -232,7 +232,7 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View v) {
                         Lienzo.setBorrado(true);
-                        Lienzo.setTamanyoPunto(pmediano);
+                        Lienzo.setTamanyoPunto(medium);
 
                         borrarpunto.dismiss();
                     }
@@ -242,7 +242,7 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
                     @Override
                     public void onClick(View v) {
                         Lienzo.setBorrado(true);
-                        Lienzo.setTamanyoPunto(pgrande);
+                        Lienzo.setTamanyoPunto(big);
 
                         borrarpunto.dismiss();
                     }
@@ -255,9 +255,9 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
             case R.id.guardar:
 
                 AlertDialog.Builder salvarDibujo = new AlertDialog.Builder(this);
-                salvarDibujo.setTitle("Salvar dibujo");
-                salvarDibujo.setMessage("¿Salvar Dibujo a la galeria?");
-                salvarDibujo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener(){
+                salvarDibujo.setTitle("Save Drawing");
+                salvarDibujo.setMessage("Save Drawing to the gallery? ");
+                salvarDibujo.setPositiveButton("Agree", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
 
 
@@ -270,12 +270,12 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
                         //Mensaje de todo correcto
                         if(imgSaved!=null){
                             Toast savedToast = Toast.makeText(getApplicationContext(),
-                                    "¡Dibujo salvado en la galeria!", Toast.LENGTH_SHORT);
+                                    "Drawing saved in the gallery!", Toast.LENGTH_SHORT);
                             savedToast.show();
                         }
                         else{
                             Toast unsavedToast = Toast.makeText(getApplicationContext(),
-                                    "¡Error! La imagen no ha podido ser salvada.", Toast.LENGTH_SHORT);
+                                    "Error! The image could not be saved.", Toast.LENGTH_SHORT);
                             unsavedToast.show();
                         }
                         lienzo.destroyDrawingCache();
@@ -283,7 +283,7 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
 
                     }
                 });
-                salvarDibujo.setNegativeButton("Cancelar", new DialogInterface.OnClickListener(){
+                salvarDibujo.setNegativeButton("Cancel", new DialogInterface.OnClickListener(){
                     public void onClick(DialogInterface dialog, int which){
                         dialog.cancel();
                     }

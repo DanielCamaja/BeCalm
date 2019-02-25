@@ -279,6 +279,12 @@ public class DistractActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
+    }
+
+    @Override
     protected void onPause() {
         super.onPause();
         mp2.stop();
@@ -318,6 +324,8 @@ public class DistractActivity extends AppCompatActivity {
             ejecutar();
             movimiento();
         }
+
+
     }
 
 

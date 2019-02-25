@@ -121,4 +121,10 @@ public class InspireActivity extends FragmentActivity {
         Log.d(TAG, msg);
     }
 
+    public void pausa(View view) {
+        mSpotifyAppRemote.getPlayerApi()
+                .pause()
+                .setResultCallback(empty -> logMessage("Pause successful"))
+                .setErrorCallback(mErrorCallback);
+    }
 }
