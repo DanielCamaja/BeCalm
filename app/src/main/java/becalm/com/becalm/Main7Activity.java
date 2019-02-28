@@ -35,6 +35,12 @@ public class Main7Activity extends AppCompatActivity {
         super.onBackPressed();
         Intent intent = new Intent(Main7Activity.this, DistractActivity.class);
         startActivity(intent);
-        finish();
+
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
     }
 }
