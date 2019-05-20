@@ -1,59 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:grid="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     android:background="@drawable/fondo"
-    tools:ignore="SmallSp">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
 
-    <Button
-        android:id="@+id/authorize"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="23dp"
-        android:layout_marginEnd="126dp"
-        android:background="@drawable/spotify_connect"
-        android:layout_centerHorizontal="true"
-        android:filterTouchesWhenObscured="false" />
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/seek_to"
+        android:layout_width="300dp"
+        android:layout_height="24dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="456dp"
+        android:progressTint="@android:color/white"
+        android:thumbTint="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.117"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
-    <Button
-        android:id="@+id/play_artist_button"
+    <androidx.appcompat.widget.AppCompatImageButton
+        android:id="@+id/play_pause_button"
         android:layout_width="100dp"
         android:layout_height="100dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginStart="47dp"
-        android:layout_marginTop="284dp"
-        android:background="@drawable/fastbutton"
+        android:background="?attr/selectableItemBackgroundBorderless"
+        android:onClick="onPlayPauseButtonClicked"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seek_to"
+        app:layout_constraintVertical_bias="0.0"
+        app:srcCompat="@drawable/play" />
+
+
+    <Button
+        android:id="@+id/connect_authorize_button"
+        style="@style/Widget.Cat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="36dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:filterTouchesWhenObscured="false"
-        android:onClick="onPlayArtistButtonClicked"
-        android:textSize="10sp"
-        grid:layout_columnWeight="1" />
+        android:lines="1"
+        android:onClick="onConnectAndAuthorizedClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.003" />
+
 
     <Button
-        android:id="@+id/play_playlist_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignTop="@+id/play_artist_button"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="61dp"
-        android:background="@drawable/slow_buttonpresionar"
+        android:id="@+id/play_podcast_button"
+        style="@style/Widget.Cat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
         android:filterTouchesWhenObscured="false"
-        android:onClick="onPlayPlaylistButtonClicked"
-        android:textSize="10sp"
-        grid:layout_columnWeight="1" />
+        android:onClick="onPlayPodcastButtonClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.703" />
 
     <Button
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="410dp"
-        android:background="@drawable/pause"
-        android:layout_centerHorizontal="true"
-        android:onClick="pausa" />
+        android:id="@+id/play_track_button"
+        style="@style/Widget.Cat.Button.Small"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:filterTouchesWhenObscured="false"
+        android:onClick="onPlayTrackButtonClicked"
+        android:text="@string/play_track_button_label"
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="496dp"
+        tools:ignore="MissingConstraints" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

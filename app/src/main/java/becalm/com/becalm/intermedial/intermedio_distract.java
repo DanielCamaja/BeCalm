@@ -24,14 +24,9 @@ public class intermedio_distract extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(intermedio_distract.this, DistractActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        finish();
     }
 
 }

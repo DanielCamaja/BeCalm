@@ -23,6 +23,7 @@ public class IntermedioRelax extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(IntermedioRelax.this, RelaxActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
 

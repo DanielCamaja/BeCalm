@@ -1,5 +1,4 @@
 package becalm.com.becalm;
-
 import com.spotify.protocol.types.Item;
 
 public interface Echo {

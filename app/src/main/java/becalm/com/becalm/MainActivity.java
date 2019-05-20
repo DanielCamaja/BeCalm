@@ -7,9 +7,6 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
-import com.crashlytics.android.Crashlytics;
-import com.crashlytics.android.ndk.CrashlyticsNdk;
-import io.fabric.sdk.android.Fabric;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,7 +18,6 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Fabric.with(this, new Crashlytics(), new CrashlyticsNdk());
         setContentView(R.layout.ingreso0);
 
 

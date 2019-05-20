@@ -24,6 +24,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".Main2Activity"
             android:screenOrientation="portrait" />
@@ -33,23 +34,31 @@
         <activity
             android:name=".RelaxActivity"
             android:screenOrientation="portrait" />
+
         <activity
             android:name=".InspireActivity"
             android:screenOrientation="portrait" />
+
+        <activity android:name=".FocusActivity"
+            android:screenOrientation="portrait"/>
+        <activity
+            android:name=".intermedial.IntermedioRelax"
+
+            android:screenOrientation="portrait" />
+
         <activity
             android:name=".intermedial.intermedio"
             android:screenOrientation="portrait" />
         <activity
             android:name=".intermedial.intermedio_distract"
+            android:label="@string/title_activity_intermedio_distract"
             android:screenOrientation="portrait" />
         <activity
             android:name=".intermedial.IntermedioFocus"
             android:label="@string/title_activity_intermedio_focus"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".intermedial.IntermedioRelax"
-            android:screenOrientation="portrait" />
-        <activity android:name=".FocusActivity" />
+
+
         <activity android:name=".fragment.Stress" />
         <activity android:name=".fragment.MediumStress" />
         <activity android:name=".fragment.HardStress" />

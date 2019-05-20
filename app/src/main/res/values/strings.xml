@@ -1,6 +1,14 @@
 <resources>
     <string name="app_name">BeCalm</string>
     <string name="title_activity_intermedio_focus">IntermedioFocus</string>
+    <string name="title_activity_intermedio_distract">intermedio_distract</string>
+    <string name="title_activity_intermedio_intermedio_relax">IntermedioRelax</string>
+
+    <!-- Connect Auth -->
+    <string name="connecting">Connecting</string>
+    <string name="connected">Connected</string>
+
+
     <string name="title_home">Home</string>
     <string name="title_dashboard">Dashboard</string>
     <string name="title_notifications">Notifications</string>
@@ -38,5 +46,11 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+
+
+    <string name="title_player_context">Player Context</string>
+    <string name="title_current_track">Current Track</string>
+    <string name="title_image_size">Image size</string>
+    <string name="title_image_scale_type">Scale type</string>
 
 </resources>

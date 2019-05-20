@@ -1,5 +1,6 @@
 package becalm.com.becalm;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.DialogInterface;
@@ -15,6 +16,7 @@ import android.widget.Toast;
 import java.util.UUID;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 
 public class FocusActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -45,7 +47,7 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_focus);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        //ActivityCompat.requestPermissions(FocusActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
+        ActivityCompat.requestPermissions(FocusActivity.this,new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},1);
 
         anaranjado = (ImageButton)findViewById(R.id.colornaranja);
         rojo = (ImageButton)findViewById(R.id.colorrojo);
@@ -94,6 +96,12 @@ public class FocusActivity extends AppCompatActivity implements View.OnClickList
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
     }
 
     @Override

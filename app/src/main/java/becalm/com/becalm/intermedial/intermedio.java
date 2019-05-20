@@ -30,6 +30,7 @@ public class intermedio extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(intermedio.this, InspireActivity.class);
                 startActivity(intent);
+                finish();
             }
         });
     }

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 public class Main7Activity extends AppCompatActivity {
@@ -42,5 +43,10 @@ public class Main7Activity extends AppCompatActivity {
     protected void onRestart() {
         super.onRestart();
 
+    }
+
+    public void regresar(View view) {
+        Intent intent01 = new Intent(this, DistractActivity.class);
+        startActivity(intent01);
     }
 }

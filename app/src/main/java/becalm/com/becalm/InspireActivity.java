@@ -1,77 +1,218 @@
 package becalm.com.becalm;
 
+import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.spotify.android.appremote.api.ConnectionParams;
 import com.spotify.android.appremote.api.Connector;
+import com.spotify.android.appremote.api.ContentApi;
 import com.spotify.android.appremote.api.SpotifyAppRemote;
+import com.spotify.android.appremote.api.error.AuthenticationFailedException;
+import com.spotify.android.appremote.api.error.CouldNotFindSpotifyApp;
+import com.spotify.android.appremote.api.error.LoggedOutException;
+import com.spotify.android.appremote.api.error.NotLoggedInException;
+import com.spotify.android.appremote.api.error.OfflineModeException;
+import com.spotify.android.appremote.api.error.SpotifyConnectionTerminatedException;
+import com.spotify.android.appremote.api.error.SpotifyDisconnectedException;
+import com.spotify.android.appremote.api.error.SpotifyRemoteServiceException;
+import com.spotify.android.appremote.api.error.UnsupportedFeatureVersionException;
+import com.spotify.android.appremote.api.error.UserNotAuthorizedException;
 import com.spotify.protocol.client.ErrorCallback;
+import com.spotify.protocol.client.Subscription;
+import com.spotify.protocol.types.Capabilities;
+import com.spotify.protocol.types.Image;
+import com.spotify.protocol.types.ListItem;
+import com.spotify.protocol.types.PlaybackSpeed;
+import com.spotify.protocol.types.PlayerContext;
+import com.spotify.protocol.types.PlayerState;
+import com.spotify.protocol.types.Repeat;
+import com.spotify.sdk.android.authentication.AuthenticationClient;
+import com.spotify.sdk.android.authentication.AuthenticationRequest;
+import com.spotify.sdk.android.authentication.AuthenticationResponse;
 
+import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 
+import androidx.appcompat.widget.AppCompatImageButton;
+import androidx.appcompat.widget.AppCompatSeekBar;
+import androidx.appcompat.widget.AppCompatTextView;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.FragmentActivity;
 
 public class InspireActivity extends FragmentActivity {
 
+
+
     private static final String TAG = InspireActivity.class.getSimpleName();
 
-    private static final String CLIENT_ID = "d8ac6bd313874183a554518bd511866f";
-    private static final String REDIRECT_URI = "combecalm://callback";
+    private static final String CLIENT_ID = "dff85b1810ea44f99c2b39f6dfd5cef9";
+    private static final int REQUEST_CODE = 1997;
+    private static final String REDIRECT_URI = "BeCalmfirst://callback";
 
-    private static final String TRACK_URI = "spotify:track:1UBQ5GK8JaQjm5VbkBZY66";
-    private static final String ALBUM_URI = "spotify:album:1x0uzT3ETlIYjPueTyNfnQ";
-    private static final String ARTIST_URI = "spotify:user:orimuraichika01:playlist:3rDRbzQ9h5uWjjIZ7YqSln";
-    private static final String PLAYLIST_URI = "spotify:user:orimuraichika01:playlist:1HDaj5Do65wq0RNPWFZa6k";
+    private static final String TRACK_URI = "spotify:track:4IWZsfEkaK49itBwCTFDXQ";
+    private static final String ALBUM_URI = "spotify:album:4nZ5wPL5XxSY2OuDgbnYdc";
+    private static final String ARTIST_URI = "spotify:artist:3WrFJ7ztbogyGnTHbHJFl2";
+    private static final String PLAYLIST_URI = "spotify:playlist:37i9dQZEVXbMDoHDwVN2tF";
+    private static final String PODCAST_URI = "spotify:show:2tgPYIeGErjk6irHRhk9kj";
 
-    private SpotifyAppRemote mSpotifyAppRemote;
+    private static SpotifyAppRemote mSpotifyAppRemote;
 
-    private TextView mRecentErrorView;
-    private ImageView mImageView;
+    Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    private Button mConnect;
-    private Button mToggleRepeatButton;
-    private Button mToggleShuffleButton;
+    Button  mConnectAuthorizeButton;
+    AppCompatImageButton mPlayPauseButton;
+    AppCompatSeekBar mSeekBar;
+
+    List<View> mViews;
+    TrackProgressBar mTrackProgressBar;
+
+    Subscription<PlayerState> mPlayerStateSubscription;
+    Subscription<Capabilities> mCapabilitiesSubscription;
 
     private final ErrorCallback mErrorCallback = throwable -> logError(throwable, "Boom!");
 
+    @SuppressLint("SetTextI18n")
+    private final Subscription.EventCallback<PlayerContext> mPlayerContextEventCallback = new Subscription.EventCallback<PlayerContext>() {
+        @Override
+        public void onEvent(PlayerContext playerContext) {
 
-    private List<View> mViews;
+        }
+    };
+
+    @SuppressLint("SetTextI18n")
+    private final Subscription.EventCallback<PlayerState> mPlayerStateEventCallback = new Subscription.EventCallback<PlayerState>() {
+        @Override
+        public void onEvent(PlayerState playerState) {
+
+            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_launcher_background, getTheme());
+
+
+            // Update progressbar
+            if (playerState.playbackSpeed > 0) {
+                mTrackProgressBar.unpause();
+            } else {
+                mTrackProgressBar.pause();
+            }
+
+            // Invalidate play / pause
+            if (playerState.isPaused) {
+                mPlayPauseButton.setImageResource(R.drawable.play);
+            } else {
+                mPlayPauseButton.setImageResource(R.drawable.pause);
+            }
+
+
+            // Get image from track
+            mSpotifyAppRemote.getImagesApi()
+                    .getImage(playerState.track.imageUri, Image.Dimension.LARGE)
+                    .setResultCallback(bitmap -> {
+                    });
+
+            // Invalidate seekbar length and position
+            mSeekBar.setMax((int) playerState.track.duration);
+            mTrackProgressBar.setDuration(playerState.track.duration);
+            mTrackProgressBar.update(playerState.playbackPosition);
+
+            mSeekBar.setEnabled(true);
+        }
+    };
+
 
     @Override
-    protected void onCreate(final Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inspire);
 
-        mConnect = findViewById(R.id.authorize);
-        mConnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                connect(true);
-            }
-        });
+        AuthenticationRequest.Builder builder =
+                new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
+
+        builder.setScopes(new String[]{"streaming"});
+        AuthenticationRequest request = builder.build();
+
+        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+
+        mConnectAuthorizeButton = findViewById(R.id.connect_authorize_button);
+        mPlayPauseButton = findViewById(R.id.play_pause_button);
+
+        mSeekBar = findViewById(R.id.seek_to);
+        mSeekBar.setEnabled(false);
+        mSeekBar.getProgressDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+        mSeekBar.getIndeterminateDrawable().setColorFilter(Color.WHITE, PorterDuff.Mode.SRC_ATOP);
+
+        mTrackProgressBar = new TrackProgressBar(mSeekBar);
+
+        mViews = Arrays.asList(
+                mPlayPauseButton,
+                findViewById(R.id.play_podcast_button),
+                findViewById(R.id.play_track_button),
+                mSeekBar);
+
+        SpotifyAppRemote.setDebugMode(true);
+
+        onDisconnected();
+        onConnectAndAuthorizedClicked(null);
     }
+
 
     @Override
     protected void onStop() {
         super.onStop();
         SpotifyAppRemote.disconnect(mSpotifyAppRemote);
+        onDisconnected();
     }
 
     private void onConnected() {
         for (View input : mViews) {
             input.setEnabled(true);
         }
-        mConnect.setEnabled(false);
+        mConnectAuthorizeButton.setEnabled(false);
+        mConnectAuthorizeButton.setText(R.string.connected);
+
+        onSubscribedToPlayerStateButtonClicked(null);
+        onSubscribedToPlayerContextButtonClicked(null);
+    }
+
+    private void onConnecting() {
+        mConnectAuthorizeButton.setEnabled(false);
+        mConnectAuthorizeButton.setText(R.string.connecting);
+    }
+
+
+    private void onDisconnected() {
+        for (View view : mViews) {
+            view.setEnabled(false);
+        }
+        mConnectAuthorizeButton.setEnabled(true);
+        mConnectAuthorizeButton.setText(R.string.authorize);
+    }
+
+
+
+    public void onConnectAndAuthorizedClicked(View view) {
+        onConnecting();
+        connect(true);
     }
 
     private void connect(boolean showAuthView) {
-        final int imageSize = (int) getResources().getDimension(R.dimen.image_size);
 
         SpotifyAppRemote.disconnect(mSpotifyAppRemote);
 
@@ -79,22 +220,91 @@ public class InspireActivity extends FragmentActivity {
                 getApplication(),
                 new ConnectionParams.Builder(CLIENT_ID)
                         .setRedirectUri(REDIRECT_URI)
-                        .setPreferredImageSize(imageSize)
                         .showAuthView(showAuthView)
                         .build(),
                 new Connector.ConnectionListener() {
                     @Override
                     public void onConnected(SpotifyAppRemote spotifyAppRemote) {
                         mSpotifyAppRemote = spotifyAppRemote;
+                        InspireActivity.this.onConnected();
                     }
 
                     @Override
                     public void onFailure(Throwable error) {
-                        logMessage(String.format("", error));
+                        if (error instanceof SpotifyRemoteServiceException) {
+                            if (error.getCause() instanceof SecurityException) {
+                                logError(error, "SecurityException");
+                            } else if (error.getCause() instanceof IllegalStateException) {
+                                logError(error, "IllegalStateException");
+                            }
+                        } else if (error instanceof NotLoggedInException) {
+                            logError(error, "NotLoggedInException");
+                        } else if (error instanceof AuthenticationFailedException) {
+                            logError(error, "AuthenticationFailedException");
+                        } else if (error instanceof CouldNotFindSpotifyApp) {
+                            logError(error, "CouldNotFindSpotifyApp");
+                        } else if (error instanceof LoggedOutException) {
+                            logError(error, "LoggedOutException");
+                        } else if (error instanceof OfflineModeException) {
+                            logError(error, "OfflineModeException");
+                        } else if (error instanceof UserNotAuthorizedException) {
+                            logError(error, "UserNotAuthorizedException");
+                        } else if (error instanceof UnsupportedFeatureVersionException) {
+                            logError(error, "UnsupportedFeatureVersionException");
+                        } else if (error instanceof SpotifyDisconnectedException) {
+                            logError(error, "SpotifyDisconnectedException");
+                        } else if (error instanceof SpotifyConnectionTerminatedException) {
+                            logError(error, "SpotifyConnectionTerminatedException");
+                        } else {
+                            logError(error, String.format("Connection failed: %s", error));
+                        }
+                        InspireActivity.this.onDisconnected();
                     }
                 });
     }
 
+    public void onDisconnectClicked(View v) {
+        SpotifyAppRemote.disconnect(mSpotifyAppRemote);
+        onDisconnected();
+    }
+
+
+
+    public void onImageScaleTypeClicked(View view) {
+        if (mSpotifyAppRemote != null) {
+            mSpotifyAppRemote.getPlayerApi()
+                    .getPlayerState()
+                    .setResultCallback(playerState -> {
+                        PopupMenu menu = new PopupMenu(this, view);
+
+                        menu.getMenu().add(0, ImageView.ScaleType.CENTER.ordinal(), 0, "CENTER");
+                        menu.getMenu().add(1, ImageView.ScaleType.CENTER_CROP.ordinal(), 1, "CENTER_CROP");
+                        menu.getMenu().add(2, ImageView.ScaleType.CENTER_INSIDE.ordinal(), 2, "CENTER_INSIDE");
+                        menu.getMenu().add(3, ImageView.ScaleType.MATRIX.ordinal(), 3, "MATRIX");
+                        menu.getMenu().add(4, ImageView.ScaleType.FIT_CENTER.ordinal(), 4, "FIT_CENTER");
+                        menu.getMenu().add(4, ImageView.ScaleType.FIT_XY.ordinal(), 5, "FIT_XY");
+
+                        menu.show();
+
+                        menu.setOnMenuItemClickListener(item -> {
+                            return false;
+                        });
+                    })
+                    .setErrorCallback(mErrorCallback);
+        }
+    }
+
+    public void onPlayPodcastButtonClicked(View view) {
+        playUri(PODCAST_URI);
+    }
+
+    public void onPlayTrackButtonClicked(View view) {
+        playUri(TRACK_URI);
+    }
+
+    public void onPlayAlbumButtonClicked(View view) {
+        playUri(ALBUM_URI);
+    }
 
     public void onPlayArtistButtonClicked(View view) {
         playUri(ARTIST_URI);
@@ -111,20 +321,276 @@ public class InspireActivity extends FragmentActivity {
                 .setErrorCallback(mErrorCallback);
     }
 
-    private void logError(Throwable t, String msg) {
+
+
+    public void showCurrentPlayerState(View view) {
+        if (view.getTag() != null) {
+            showDialog("PlayerState", gson.toJson(view.getTag()));
+        }
+    }
+
+
+    public void onSetShuffleTrueButtonClicked(View view) {
+        mSpotifyAppRemote.getPlayerApi()
+                .setShuffle(true)
+                .setResultCallback(empty -> logMessage("Set shuffle true successful"))
+                .setErrorCallback(mErrorCallback);
+    }
+
+    public void onSetRepeatAllButtonClicked(View view) {
+        mSpotifyAppRemote.getPlayerApi()
+                .setRepeat(Repeat.ALL)
+                .setResultCallback(empty -> logMessage("Set repeat ALL successful"))
+                .setErrorCallback(mErrorCallback);
+    }
+
+    public void onSkipPreviousButtonClicked(View view) {
+        mSpotifyAppRemote.getPlayerApi()
+                .skipPrevious()
+                .setResultCallback(empty -> logMessage("Skip previous successful"))
+                .setErrorCallback(mErrorCallback);
+    }
+
+    public void onPlayPauseButtonClicked(View view) {
+        mSpotifyAppRemote.getPlayerApi().getPlayerState().setResultCallback(playerState -> {
+            if (playerState.isPaused) {
+                mSpotifyAppRemote.getPlayerApi()
+                        .resume()
+                        .setResultCallback(empty -> logMessage("Play current track successful"))
+                        .setErrorCallback(mErrorCallback);
+            } else {
+                mSpotifyAppRemote.getPlayerApi()
+                        .pause()
+                        .setResultCallback(empty -> logMessage("Pause successful"))
+                        .setErrorCallback(mErrorCallback);
+            }
+        });
+    }
+
+    public void onSkipNextButtonClicked(View view) {
+        mSpotifyAppRemote.getPlayerApi()
+                .skipNext()
+                .setResultCallback(data -> {
+                    logMessage("Skip next successful");
+                })
+                .setErrorCallback(mErrorCallback);
+    }
+
+
+
+
+
+    @SuppressLint("SetTextI18n")
+    public void onSubscribeToCapabilities(View view) {
+
+        if (mCapabilitiesSubscription != null && !mCapabilitiesSubscription.isCanceled()) {
+            mCapabilitiesSubscription.cancel();
+            mCapabilitiesSubscription = null;
+        }
+
+        mCapabilitiesSubscription = (Subscription<Capabilities>) mSpotifyAppRemote.getUserApi()
+                .subscribeToCapabilities()
+                .setEventCallback(capabilities -> logMessage(String.format("Can play on demand: %s", capabilities.canPlayOnDemand)))
+                .setErrorCallback(mErrorCallback);
+
+        mSpotifyAppRemote.getUserApi()
+                .getCapabilities()
+                .setResultCallback(capabilities -> logMessage(String.format("Can play on demand: %s", capabilities.canPlayOnDemand)))
+                .setErrorCallback(mErrorCallback);
+    }
+
+    public void onGetCollectionState(View view) {
+        mSpotifyAppRemote.getUserApi()
+                .getLibraryState(TRACK_URI)
+                .setResultCallback(libraryState -> logMessage(String.format(
+                        "Item is in collection: %s\nCan be added to collection: %s",
+                        libraryState.isAdded,
+                        libraryState.canAdd
+                )))
+                .setErrorCallback(t -> logError(t, "Error:" + t.getMessage()));
+    }
+
+    public void onRemoveUri(View view) {
+        mSpotifyAppRemote.getUserApi()
+                .removeFromLibrary(TRACK_URI)
+                .setResultCallback(empty -> logMessage("Remove from collection successful"))
+                .setErrorCallback(throwable -> logError(throwable, "Error:" + throwable.getMessage()));
+    }
+
+    public void onSaveUri(View view) {
+        mSpotifyAppRemote.getUserApi()
+                .addToLibrary(TRACK_URI)
+                .setResultCallback(empty -> logMessage("Add to collection successful"))
+                .setErrorCallback(throwable -> logError(throwable, "Error:" + throwable.getMessage()));
+    }
+
+    public void onGetFitnessRecommendedContentItems(View view) {
+        mSpotifyAppRemote.getContentApi()
+                .getRecommendedContentItems(ContentApi.ContentType.FITNESS)
+                .setResultCallback(listItems -> mSpotifyAppRemote.getContentApi()
+                        .getChildrenOfItem(listItems.items[0], 3, 0)
+                        .setResultCallback(childListItems -> {
+                            showDialog("RecommendedContentItems", gson.toJson(childListItems));
+                            ListItem item = null;
+                            for (int i = 0; i < childListItems.items.length; ++i) {
+                                item = childListItems.items[i];
+                                if (item.playable) {
+                                    logMessage(String.format("Trying to play %s", item.title));
+                                    break;
+                                } else {
+                                    item = null;
+                                }
+                            }
+                        })
+                        .setErrorCallback(mErrorCallback)).setErrorCallback(mErrorCallback);
+    }
+
+    public void onConnectSwitchToLocal(View view) {
+        mSpotifyAppRemote.getConnectApi()
+                .connectSwitchToLocalDevice()
+                .setResultCallback(empty -> logMessage("Success!"))
+                .setErrorCallback(mErrorCallback);
+    }
+
+    public void onSubscribedToPlayerContextButtonClicked(View view) {
+
+    }
+
+    public void onSubscribedToPlayerStateButtonClicked(View view) {
+
+        if (mPlayerStateSubscription != null && !mPlayerStateSubscription.isCanceled()) {
+            mPlayerStateSubscription.cancel();
+            mPlayerStateSubscription = null;
+        }
+
+
+        mPlayerStateSubscription = (Subscription<PlayerState>) mSpotifyAppRemote.getPlayerApi()
+                .subscribeToPlayerState()
+                .setEventCallback(mPlayerStateEventCallback)
+                .setLifecycleCallback(new Subscription.LifecycleCallback() {
+                    @Override
+                    public void onStart() {
+                        logMessage("Event: start");
+                    }
+
+                    @Override
+                    public void onStop() {
+                        logMessage("Event: end");
+                    }
+                })
+                .setErrorCallback(throwable -> {
+                    logError(throwable, "Subscribed to PlayerContext failed!");
+                });
+    }
+
+    public void onEcho(View view) {
+        mSpotifyAppRemote
+                .call("com.spotify.echo", new Echo.Request("Hodor!"), Echo.Response.class)
+                .setResultCallback(data -> logMessage(String.format("Echo to 'Hodor!' is '%s'", data.response)))
+                .setErrorCallback(mErrorCallback);
+    }
+
+    private void logError(Throwable throwable, String msg) {
         Toast.makeText(this, "Error: " + msg, Toast.LENGTH_SHORT).show();
-        Log.e(TAG, msg, t);
+        Log.e(TAG, msg, throwable);
     }
 
     private void logMessage(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+        logMessage(msg, Toast.LENGTH_SHORT);
+    }
+
+    private void logMessage(String msg, int duration) {
+        Toast.makeText(this, msg, duration).show();
         Log.d(TAG, msg);
     }
 
-    public void pausa(View view) {
-        mSpotifyAppRemote.getPlayerApi()
-                .pause()
-                .setResultCallback(empty -> logMessage("Pause successful"))
-                .setErrorCallback(mErrorCallback);
+    private void showDialog(String title, String message) {
+        new AlertDialog.Builder(this)
+                .setTitle(title)
+                .setMessage(message)
+                .create()
+                .show();
     }
+
+
+    private class TrackProgressBar {
+
+        private static final int LOOP_DURATION = 500;
+        private final SeekBar mSeekBar;
+        private final Handler mHandler;
+
+
+        private final SeekBar.OnSeekBarChangeListener mSeekBarChangeListener = new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                mSpotifyAppRemote.getPlayerApi().seekTo(seekBar.getProgress())
+                        .setErrorCallback(mErrorCallback);
+            }
+        };
+
+        private final Runnable mSeekRunnable = new Runnable() {
+            @Override
+            public void run() {
+                int progress = mSeekBar.getProgress();
+                mSeekBar.setProgress(progress + LOOP_DURATION);
+                mHandler.postDelayed(mSeekRunnable, LOOP_DURATION);
+            }
+        };
+
+        private TrackProgressBar(SeekBar seekBar) {
+            mSeekBar = seekBar;
+            mSeekBar.setOnSeekBarChangeListener(mSeekBarChangeListener);
+            mHandler = new Handler();
+        }
+
+        private void setDuration(long duration) {
+            mSeekBar.setMax((int) duration);
+        }
+
+        private void update(long progress) {
+            mSeekBar.setProgress((int) progress);
+        }
+
+        private void pause() {
+            mHandler.removeCallbacks(mSeekRunnable);
+        }
+
+        private void unpause() {
+            mHandler.removeCallbacks(mSeekRunnable);
+            mHandler.postDelayed(mSeekRunnable, LOOP_DURATION);
+        }
+    }
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        // Check if result comes from the correct activity
+        if (requestCode == REQUEST_CODE) {
+            AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, intent);
+
+            switch (response.getType()) {
+                // Response was successful and contains auth token
+                case TOKEN:
+                    // Handle successful response
+                    break;
+
+                // Auth flow returned an error
+                case ERROR:
+                    // Handle error response
+                    break;
+
+                // Most likely auth flow was cancelled
+                default:
+                    // Handle other cases
+            }
+        }
+    }
+
 }

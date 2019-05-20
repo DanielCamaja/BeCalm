@@ -6,7 +6,6 @@
     android:background="@drawable/fondo"
     android:padding="16dp">
 
-
     <TextView
         android:layout_width="350dp"
         android:layout_height="wrap_content"
