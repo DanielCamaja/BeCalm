@@ -65,14 +65,14 @@ public class InspireActivity extends FragmentActivity {
     private static final String TAG = InspireActivity.class.getSimpleName();
 
     private static final String CLIENT_ID = "dff85b1810ea44f99c2b39f6dfd5cef9";
-    private static final int REQUEST_CODE = 1997;
+    private static final int REQUEST_CODE = 1998;
     private static final String REDIRECT_URI = "BeCalmfirst://callback";
 
-    private static final String TRACK_URI = "spotify:track:4IWZsfEkaK49itBwCTFDXQ";
+    private static final String TRACK_URI = "spotify:playlist:1HDaj5Do65wq0RNPWFZa6k";
     private static final String ALBUM_URI = "spotify:album:4nZ5wPL5XxSY2OuDgbnYdc";
     private static final String ARTIST_URI = "spotify:artist:3WrFJ7ztbogyGnTHbHJFl2";
     private static final String PLAYLIST_URI = "spotify:playlist:37i9dQZEVXbMDoHDwVN2tF";
-    private static final String PODCAST_URI = "spotify:show:2tgPYIeGErjk6irHRhk9kj";
+    private static final String PODCAST_URI = "spotify:playlist:3rDRbzQ9h5uWjjIZ7YqSln";
 
     private static SpotifyAppRemote mSpotifyAppRemote;
 
@@ -81,8 +81,11 @@ public class InspireActivity extends FragmentActivity {
     Button  mConnectAuthorizeButton;
     AppCompatImageButton mPlayPauseButton;
     AppCompatSeekBar mSeekBar;
+    AppCompatTextView mImageScaleTypeLabel;
+    ImageView mCoverArtImageView;
 
     List<View> mViews;
+
     TrackProgressBar mTrackProgressBar;
 
     Subscription<PlayerState> mPlayerStateSubscription;
@@ -103,9 +106,6 @@ public class InspireActivity extends FragmentActivity {
         @Override
         public void onEvent(PlayerState playerState) {
 
-            Drawable drawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_launcher_background, getTheme());
-
-
             // Update progressbar
             if (playerState.playbackSpeed > 0) {
                 mTrackProgressBar.unpause();
@@ -115,9 +115,9 @@ public class InspireActivity extends FragmentActivity {
 
             // Invalidate play / pause
             if (playerState.isPaused) {
-                mPlayPauseButton.setImageResource(R.drawable.play);
+                mPlayPauseButton.setImageResource(R.drawable.btn_play);
             } else {
-                mPlayPauseButton.setImageResource(R.drawable.pause);
+                mPlayPauseButton.setImageResource(R.drawable.btn_pause);
             }
 
 
@@ -125,6 +125,7 @@ public class InspireActivity extends FragmentActivity {
             mSpotifyAppRemote.getImagesApi()
                     .getImage(playerState.track.imageUri, Image.Dimension.LARGE)
                     .setResultCallback(bitmap -> {
+                        mCoverArtImageView.setImageBitmap(bitmap);
                     });
 
             // Invalidate seekbar length and position
@@ -135,7 +136,6 @@ public class InspireActivity extends FragmentActivity {
             mSeekBar.setEnabled(true);
         }
     };
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -150,8 +150,11 @@ public class InspireActivity extends FragmentActivity {
 
         AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
 
+
         mConnectAuthorizeButton = findViewById(R.id.connect_authorize_button);
         mPlayPauseButton = findViewById(R.id.play_pause_button);
+        mCoverArtImageView = findViewById(R.id.image);
+
 
         mSeekBar = findViewById(R.id.seek_to);
         mSeekBar.setEnabled(false);
@@ -164,7 +167,10 @@ public class InspireActivity extends FragmentActivity {
                 mPlayPauseButton,
                 findViewById(R.id.play_podcast_button),
                 findViewById(R.id.play_track_button),
-                mSeekBar);
+                mSeekBar
+                //findViewById(R.id.skip_prev_button),
+                //findViewById(R.id.skip_next_button),
+                );
 
         SpotifyAppRemote.setDebugMode(true);
 
@@ -202,6 +208,7 @@ public class InspireActivity extends FragmentActivity {
             view.setEnabled(false);
         }
         mConnectAuthorizeButton.setEnabled(true);
+        mCoverArtImageView.setImageResource(R.drawable.widget_placeholder);
         mConnectAuthorizeButton.setText(R.string.authorize);
     }
 
@@ -287,6 +294,8 @@ public class InspireActivity extends FragmentActivity {
                         menu.show();
 
                         menu.setOnMenuItemClickListener(item -> {
+                            mCoverArtImageView.setScaleType(ImageView.ScaleType.values()[item.getItemId()]);
+                            mImageScaleTypeLabel.setText(ImageView.ScaleType.values()[item.getItemId()].toString());
                             return false;
                         });
                     })
@@ -375,7 +384,6 @@ public class InspireActivity extends FragmentActivity {
                 })
                 .setErrorCallback(mErrorCallback);
     }
-
 
 
 
@@ -512,6 +520,36 @@ public class InspireActivity extends FragmentActivity {
                 .show();
     }
 
+    public void onImageClicked(View view) {
+        if (mSpotifyAppRemote != null) {
+            mSpotifyAppRemote.getPlayerApi()
+                    .getPlayerState()
+                    .setResultCallback(playerState -> {
+                        PopupMenu menu = new PopupMenu(this, view);
+
+                        menu.getMenu().add(720, 720, 0, "Large (720px)");
+                        menu.getMenu().add(480, 480, 1, "Medium (480px)");
+                        menu.getMenu().add(360, 360, 2, "Small (360px)");
+                        menu.getMenu().add(240, 240, 3, "X Small (240px)");
+                        menu.getMenu().add(144, 144, 4, "Thumbnail (144px)");
+
+                        menu.show();
+
+                        menu.setOnMenuItemClickListener(item -> {
+                            mSpotifyAppRemote.getImagesApi()
+                                    .getImage(playerState.track.imageUri, Image.Dimension.values()[item.getOrder()])
+                                    .setResultCallback(bitmap -> {
+                                        mCoverArtImageView.setImageBitmap(bitmap);
+                                    });
+                            return false;
+                        });
+                    })
+                    .setErrorCallback(mErrorCallback);
+        }
+    }
+
+
+
 
     private class TrackProgressBar {
 
@@ -568,29 +606,4 @@ public class InspireActivity extends FragmentActivity {
             mHandler.postDelayed(mSeekRunnable, LOOP_DURATION);
         }
     }
-    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        super.onActivityResult(requestCode, resultCode, intent);
-
-        // Check if result comes from the correct activity
-        if (requestCode == REQUEST_CODE) {
-            AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, intent);
-
-            switch (response.getType()) {
-                // Response was successful and contains auth token
-                case TOKEN:
-                    // Handle successful response
-                    break;
-
-                // Auth flow returned an error
-                case ERROR:
-                    // Handle error response
-                    break;
-
-                // Most likely auth flow was cancelled
-                default:
-                    // Handle other cases
-            }
-        }
-    }
-
 }

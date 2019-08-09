@@ -7,61 +7,65 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/image"
+        android:layout_width="257dp"
+        android:layout_height="250dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="340dp"
+        android:onClick="onImageClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintDimensionRatio="1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.263"
+        tools:srcCompat="@drawable/widget_placeholder" />
 
     <androidx.appcompat.widget.AppCompatSeekBar
         android:id="@+id/seek_to"
-        android:layout_width="300dp"
+        android:layout_width="350dp"
         android:layout_height="24dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="456dp"
+        android:layout_marginBottom="8dp"
         android:progressTint="@android:color/white"
         android:thumbTint="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.117"
-        app:layout_constraintStart_toStartOf="parent" />
-
+        app:layout_constraintHorizontal_bias="0.466"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/image"
+        app:layout_constraintVertical_bias="0.089"
+        tools:ignore="MissingConstraints" />
 
     <androidx.appcompat.widget.AppCompatImageButton
         android:id="@+id/play_pause_button"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="45dp"
+        android:layout_height="96dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:onClick="onPlayPauseButtonClicked"
+        app:layout_constraintBottom_toTopOf="@+id/connect_authorize_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/seek_to"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/play" />
+        app:srcCompat="@drawable/play"
+        tools:ignore="MissingConstraints" />
 
 
-    <Button
-        android:id="@+id/connect_authorize_button"
-        style="@style/Widget.Cat.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="36dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
-        android:filterTouchesWhenObscured="false"
-        android:lines="1"
-        android:onClick="onConnectAndAuthorizedClicked"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.003" />
 
 
     <Button
         android:id="@+id/play_podcast_button"
         style="@style/Widget.Cat.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
@@ -70,21 +74,44 @@
         android:onClick="onPlayPodcastButtonClicked"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.846"
+        app:layout_constraintHorizontal_bias="0.935"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.703" />
+        app:layout_constraintVertical_bias="0.899" />
+
+    <Button
+        android:id="@+id/connect_authorize_button"
+        style="@style/Widget.Cat.Button.Small"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:filterTouchesWhenObscured="false"
+        android:onClick="onConnectAndAuthorizedClicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/play_podcast_button"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toEndOf="@+id/play_track_button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.904"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/play_track_button"
         style="@style/Widget.Cat.Button.Small"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:filterTouchesWhenObscured="false"
         android:onClick="onPlayTrackButtonClicked"
-        android:text="@string/play_track_button_label"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="496dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.083"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.893"
         tools:ignore="MissingConstraints" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
