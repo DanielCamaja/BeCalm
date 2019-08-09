@@ -60,12 +60,11 @@ import androidx.fragment.app.FragmentActivity;
 
 public class InspireActivity extends FragmentActivity {
 
-
-
     private static final String TAG = InspireActivity.class.getSimpleName();
 
     private static final String CLIENT_ID = "dff85b1810ea44f99c2b39f6dfd5cef9";
-    private static final int REQUEST_CODE = 1998;
+
+    private static final int REQUEST_CODE = 1997;
     private static final String REDIRECT_URI = "BeCalmfirst://callback";
 
     private static final String TRACK_URI = "spotify:playlist:1HDaj5Do65wq0RNPWFZa6k";
@@ -74,11 +73,14 @@ public class InspireActivity extends FragmentActivity {
     private static final String PLAYLIST_URI = "spotify:playlist:37i9dQZEVXbMDoHDwVN2tF";
     private static final String PODCAST_URI = "spotify:playlist:3rDRbzQ9h5uWjjIZ7YqSln";
 
+
+
+
     private static SpotifyAppRemote mSpotifyAppRemote;
 
     Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-    Button  mConnectAuthorizeButton;
+    Button mConnectAuthorizeButton;
     AppCompatImageButton mPlayPauseButton;
     AppCompatSeekBar mSeekBar;
     AppCompatTextView mImageScaleTypeLabel;
@@ -94,17 +96,17 @@ public class InspireActivity extends FragmentActivity {
     private final ErrorCallback mErrorCallback = throwable -> logError(throwable, "Boom!");
 
     @SuppressLint("SetTextI18n")
-    private final Subscription.EventCallback<PlayerContext> mPlayerContextEventCallback = new Subscription.EventCallback<PlayerContext>() {
-        @Override
-        public void onEvent(PlayerContext playerContext) {
-
-        }
-    };
-
-    @SuppressLint("SetTextI18n")
     private final Subscription.EventCallback<PlayerState> mPlayerStateEventCallback = new Subscription.EventCallback<PlayerState>() {
         @Override
         public void onEvent(PlayerState playerState) {
+
+            AuthenticationRequest.Builder builder =
+                    new AuthenticationRequest.Builder(CLIENT_ID, AuthenticationResponse.Type.TOKEN, REDIRECT_URI);
+
+            builder.setScopes(new String[]{"streaming"});
+            AuthenticationRequest request = builder.build();
+
+            AuthenticationClient.openLoginActivity(InspireActivity.this, REQUEST_CODE, request);
 
             // Update progressbar
             if (playerState.playbackSpeed > 0) {
@@ -112,7 +114,6 @@ public class InspireActivity extends FragmentActivity {
             } else {
                 mTrackProgressBar.pause();
             }
-
             // Invalidate play / pause
             if (playerState.isPaused) {
                 mPlayPauseButton.setImageResource(R.drawable.btn_play);
@@ -148,7 +149,7 @@ public class InspireActivity extends FragmentActivity {
         builder.setScopes(new String[]{"streaming"});
         AuthenticationRequest request = builder.build();
 
-        AuthenticationClient.openLoginActivity(this, REQUEST_CODE, request);
+        AuthenticationClient.openLoginActivity(InspireActivity.this, REQUEST_CODE, request);
 
 
         mConnectAuthorizeButton = findViewById(R.id.connect_authorize_button);
@@ -170,7 +171,7 @@ public class InspireActivity extends FragmentActivity {
                 mSeekBar
                 //findViewById(R.id.skip_prev_button),
                 //findViewById(R.id.skip_next_button),
-                );
+        );
 
         SpotifyAppRemote.setDebugMode(true);
 
@@ -184,6 +185,32 @@ public class InspireActivity extends FragmentActivity {
         super.onStop();
         SpotifyAppRemote.disconnect(mSpotifyAppRemote);
         onDisconnected();
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        super.onActivityResult(requestCode, resultCode, intent);
+
+        // Check if result comes from the correct activity
+        if (requestCode == REQUEST_CODE) {
+            AuthenticationResponse response = AuthenticationClient.getResponse(resultCode, intent);
+
+            switch (response.getType()) {
+                // Response was successful and contains auth token
+                case TOKEN:
+                    // Handle successful response
+                    break;
+
+                // Auth flow returned an error
+                case ERROR:
+                    // Handle error response
+                    break;
+
+                // Most likely auth flow was cancelled
+                default:
+                    // Handle other cases
+            }
+        }
     }
 
     private void onConnected() {
@@ -193,7 +220,7 @@ public class InspireActivity extends FragmentActivity {
         mConnectAuthorizeButton.setEnabled(false);
         mConnectAuthorizeButton.setText(R.string.connected);
 
-        onSubscribedToPlayerStateButtonClicked(null);
+        //onSubscribedToPlayerStateButtonClicked(null);
         onSubscribedToPlayerContextButtonClicked(null);
     }
 
@@ -211,7 +238,6 @@ public class InspireActivity extends FragmentActivity {
         mCoverArtImageView.setImageResource(R.drawable.widget_placeholder);
         mConnectAuthorizeButton.setText(R.string.authorize);
     }
-
 
 
     public void onConnectAndAuthorizedClicked(View view) {
@@ -276,33 +302,6 @@ public class InspireActivity extends FragmentActivity {
     }
 
 
-
-    public void onImageScaleTypeClicked(View view) {
-        if (mSpotifyAppRemote != null) {
-            mSpotifyAppRemote.getPlayerApi()
-                    .getPlayerState()
-                    .setResultCallback(playerState -> {
-                        PopupMenu menu = new PopupMenu(this, view);
-
-                        menu.getMenu().add(0, ImageView.ScaleType.CENTER.ordinal(), 0, "CENTER");
-                        menu.getMenu().add(1, ImageView.ScaleType.CENTER_CROP.ordinal(), 1, "CENTER_CROP");
-                        menu.getMenu().add(2, ImageView.ScaleType.CENTER_INSIDE.ordinal(), 2, "CENTER_INSIDE");
-                        menu.getMenu().add(3, ImageView.ScaleType.MATRIX.ordinal(), 3, "MATRIX");
-                        menu.getMenu().add(4, ImageView.ScaleType.FIT_CENTER.ordinal(), 4, "FIT_CENTER");
-                        menu.getMenu().add(4, ImageView.ScaleType.FIT_XY.ordinal(), 5, "FIT_XY");
-
-                        menu.show();
-
-                        menu.setOnMenuItemClickListener(item -> {
-                            mCoverArtImageView.setScaleType(ImageView.ScaleType.values()[item.getItemId()]);
-                            mImageScaleTypeLabel.setText(ImageView.ScaleType.values()[item.getItemId()].toString());
-                            return false;
-                        });
-                    })
-                    .setErrorCallback(mErrorCallback);
-        }
-    }
-
     public void onPlayPodcastButtonClicked(View view) {
         playUri(PODCAST_URI);
     }
@@ -329,7 +328,6 @@ public class InspireActivity extends FragmentActivity {
                 .setResultCallback(empty -> logMessage("Play successful"))
                 .setErrorCallback(mErrorCallback);
     }
-
 
 
     public void showCurrentPlayerState(View view) {
@@ -374,6 +372,8 @@ public class InspireActivity extends FragmentActivity {
                         .setErrorCallback(mErrorCallback);
             }
         });
+
+
     }
 
     public void onSkipNextButtonClicked(View view) {
@@ -384,8 +384,6 @@ public class InspireActivity extends FragmentActivity {
                 })
                 .setErrorCallback(mErrorCallback);
     }
-
-
 
 
     @SuppressLint("SetTextI18n")
@@ -548,7 +546,31 @@ public class InspireActivity extends FragmentActivity {
         }
     }
 
+    public void onImageScaleTypeClicked(View view) {
+        if (mSpotifyAppRemote != null) {
+            mSpotifyAppRemote.getPlayerApi()
+                    .getPlayerState()
+                    .setResultCallback(playerState -> {
+                        PopupMenu menu = new PopupMenu(this, view);
 
+                        menu.getMenu().add(0, ImageView.ScaleType.CENTER.ordinal(), 0, "CENTER");
+                        menu.getMenu().add(1, ImageView.ScaleType.CENTER_CROP.ordinal(), 1, "CENTER_CROP");
+                        menu.getMenu().add(2, ImageView.ScaleType.CENTER_INSIDE.ordinal(), 2, "CENTER_INSIDE");
+                        menu.getMenu().add(3, ImageView.ScaleType.MATRIX.ordinal(), 3, "MATRIX");
+                        menu.getMenu().add(4, ImageView.ScaleType.FIT_CENTER.ordinal(), 4, "FIT_CENTER");
+                        menu.getMenu().add(4, ImageView.ScaleType.FIT_XY.ordinal(), 5, "FIT_XY");
+
+                        menu.show();
+
+                        menu.setOnMenuItemClickListener(item -> {
+                            mCoverArtImageView.setScaleType(ImageView.ScaleType.values()[item.getItemId()]);
+                            mImageScaleTypeLabel.setText(ImageView.ScaleType.values()[item.getItemId()].toString());
+                            return false;
+                        });
+                    })
+                    .setErrorCallback(mErrorCallback);
+        }
+    }
 
 
     private class TrackProgressBar {
@@ -606,4 +628,5 @@ public class InspireActivity extends FragmentActivity {
             mHandler.postDelayed(mSeekRunnable, LOOP_DURATION);
         }
     }
+
 }
